@@ -269,7 +269,7 @@
 				echo "</form>";
 			}
 			else
-			header("Location: http://www.kaboom356.net/csce4410/project/index.php");
+			header("Location: index.php");
 			?></td>
 		</tr>
 	</table>
