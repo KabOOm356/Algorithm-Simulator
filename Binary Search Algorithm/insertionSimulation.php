@@ -28,19 +28,19 @@
 
 				// The augmented array
 				if(isset($_POST['augarray']))
-				$aArray = unserialize($_POST['augarray']);
+					$aArray = unserialize($_POST['augarray']);
 				elseif($index != count($array)-1 || $array[$index] != "")
 				{
 					$aArray = $array;
 					$aArray[] = "";
 				}
 				else
-				$aArray = $array;
+					$aArray = $array;
 
 				if(isset($_POST['currentIndex']))
-				$currentIndex = $_POST['currentIndex'];
+					$currentIndex = $_POST['currentIndex'];
 				else
-				$currentIndex = ($index);
+					$currentIndex = ($index);
 
 				if($index == count($aArray)-1)
 				{
@@ -48,13 +48,13 @@
 					$done = true;
 				}
 				elseif($currentIndex != -1)
-				$aArray[$currentIndex+1] = $aArray[$currentIndex];
+					$aArray[$currentIndex+1] = $aArray[$currentIndex];
 					
 				if($index == $currentIndex+1 && isset($_POST['correct']))
-				$done = true;
+					$done = true;
 					
 				if($done)
-				$aArray[$index] = $insert;
+					$aArray[$index] = $insert;
 
 				echo "<p>Inserting the value $insert in index position $index:</p>";
 
@@ -80,7 +80,7 @@
 					else
 					{
 						if($currentIndex == count($array)-2)
-						echo "<p>The process is repeated here with the next lower index.  As you can see, the<br/>index value is copied to the next position each time through a loop.</p>";
+							echo "<p>The process is repeated here with the next lower index.  As you can see, the<br/>index value is copied to the next position each time through a loop.</p>";
 
 						echo "<p>In this case, copy index $currentIndex (" . $aArray[$currentIndex] . ") to index " . ($currentIndex+1) . ".</p>";
 					}
@@ -88,7 +88,7 @@
 				else
 				{
 					if($index == count($aArray)-1)
-					echo "<p>In this example add an index to the end of the array ($index) and then insert the value ($insert) into it.</p>";
+						echo "<p>In this example add an index to the end of the array ($index) and then insert the value ($insert) into it.</p>";
 					elseif($index == count($aArray)-2)
 					{
 						// really didn't want to do this but it's a quick fix
@@ -113,7 +113,7 @@
 				echo "<tr align='center' valign='bottom'>";
 
 				for($LCV = 0; $LCV < count($aArray); $LCV++)
-				echo "<td width='52'>$LCV</td>";
+					echo "<td width='52'>$LCV</td>";
 					
 				echo "</tr></table>";
 
@@ -121,29 +121,31 @@
 				echo "<tr align='center'>";
 
 				for($LCV = 0; $LCV < count($aArray); $LCV++)
-				if(!isset($_POST['correct']) && $index != count($aArray)-2)
 				{
-					if($LCV < $index)
-					echo "<td width='40' bgcolor=gray>" . $aArray[$LCV] . "</td>";
-					elseif($LCV == $index)
-					echo "<td width='40' bgcolor=yellow>" . $aArray[$LCV] . "</td>";
-					elseif($LCV <= $currentIndex+1)
-					echo "<td width='40' bgcolor=red>" . $aArray[$LCV] . "</td>";
+					if(!isset($_POST['correct']) && $index != count($aArray)-2)
+					{
+						if($LCV < $index)
+							echo "<td width='40' bgcolor=gray>" . $aArray[$LCV] . "</td>";
+						elseif($LCV == $index)
+							echo "<td width='40' bgcolor=yellow>" . $aArray[$LCV] . "</td>";
+						elseif($LCV <= $currentIndex+1)
+							echo "<td width='40' bgcolor=red>" . $aArray[$LCV] . "</td>";
+						else
+							echo "<td width='40' bgcolor=white>" . $aArray[$LCV] . "</td>";
+					}
 					else
-					echo "<td width='40' bgcolor=white>" . $aArray[$LCV] . "</td>";
-				}
-				else
-				{
-					if($LCV < $index)
-					echo "<td width='40' bgcolor=gray>" . $aArray[$LCV] . "</td>";
-					elseif($LCV == $index)
-					echo "<td width='40' bgcolor=yellow>" . $aArray[$LCV] . "</td>";
-					elseif($LCV == $currentIndex)
-					echo "<td width='40' bgcolor=blue>" . $aArray[$LCV] . "</td>";
-					elseif($LCV > $currentIndex)
-					echo "<td width='40' bgcolor=green>" . $aArray[$LCV] . "</td>";
-					else
-					echo "<td width='40' bgcolor=white>" . $aArray[$LCV] . "</td>";
+					{
+						if($LCV < $index)
+							echo "<td width='40' bgcolor=gray>" . $aArray[$LCV] . "</td>";
+						elseif($LCV == $index)
+							echo "<td width='40' bgcolor=yellow>" . $aArray[$LCV] . "</td>";
+						elseif($LCV == $currentIndex)
+							echo "<td width='40' bgcolor=blue>" . $aArray[$LCV] . "</td>";
+						elseif($LCV > $currentIndex)
+							echo "<td width='40' bgcolor=green>" . $aArray[$LCV] . "</td>";
+						else
+						echo "<td width='40' bgcolor=white>" . $aArray[$LCV] . "</td>";
+					}
 				}
 					
 				echo "</tr></table>";
@@ -159,7 +161,7 @@
 						{
 							echo "<td width='52'>&uarr;<br/>Insert<br/>Here<br/></td>";
 							if($index == 0)
-							echo "<td width='52'>&nbsp;<br/></td>";
+								echo "<td width='52'>&nbsp;<br/></td>";
 						}
 						elseif(!isset($_POST['correct']) && $LCV == $currentIndex+1)
 						{
@@ -176,8 +178,7 @@
 					else
 					{
 						if($LCV != $currentIndex)
-						echo "<td width='52'>&nbsp;<br/></td>";
-							
+							echo "<td width='52'>&nbsp;<br/></td>";	
 					}
 				}
 
@@ -201,15 +202,15 @@
 				else
 				{
 					if($index != count($array)-1 && $currentIndex == $index)
-					echo "<p>When this copy takes place, the value " . $array[$index+1] . " is replaced by " . $array[$index] . ", losing the<br/>value " . $array[$index+1] . " forever.</p>";
+						echo "<p>When this copy takes place, the value " . $array[$index+1] . " is replaced by " . $array[$index] . ", losing the<br/>value " . $array[$index+1] . " forever.</p>";
 					elseif($index != count($array)-1)
-					echo "<p>Instead, we clearly have to process the elements from the top down.</p>";
+						echo "<p>Instead, we clearly have to process the elements from the top down.</p>";
 				}
 
 				if(isset($_POST['correct']))
-				$currentIndex--;
+					$currentIndex--;
 				else
-				$currentIndex++;
+					$currentIndex++;
 					
 				if(!$done)
 				{
@@ -259,17 +260,17 @@
 				echo "<b><font color='red'>One or all of the required variables were not set properly.<br/><br/>You must return to the Simulator Selection Menu to get the error and restart</font><br/><br/>";
 				echo "<form action='index.php' method='POST'>";
 				if(isset($_POST['index']))
-				echo "<input type='hidden' name='index' value='" . $_POST['index'] . "'>";
+					echo "<input type='hidden' name='index' value='" . $_POST['index'] . "'>";
 				if(isset($_POST['array']))
-				echo "<input type='hidden' name='array' value='" . $_POST['array'] . "'>";
+					echo "<input type='hidden' name='array' value='" . $_POST['array'] . "'>";
 				if(isset($_POST['insert']))
-				echo "<input type='hidden' name='insert' value='" . $_POST['insert'] . "'>";
+					echo "<input type='hidden' name='insert' value='" . $_POST['insert'] . "'>";
 				echo "<input type='hidden' name='insDebug' value='true'>";
 				echo "<input type='submit' value='Return to Simulator Selection Menu'>";
 				echo "</form>";
 			}
 			else
-			header("Location: index.php");
+				header("Location: index.php");
 			?></td>
 		</tr>
 	</table>

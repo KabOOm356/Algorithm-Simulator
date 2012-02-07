@@ -33,9 +33,9 @@
 				for($LCV = 0; $LCV < count($in); $LCV++)
 				{
 					if($LCV != count($in))
-					$array = $array . $in[$LCV] . " ";
+						$array = $array . $in[$LCV] . " ";
 					else
-					$array = $array . $in[$LCV];
+						$array = $array . $in[$LCV];
 						
 				}
 				$array = trim($array);
@@ -48,7 +48,7 @@
 				$midNew = $mid = intval($_POST['mid']);
 				$lastNew = $last = intval($_POST['last']);
 				if($last == -2)
-				$lastNew = $last = count($array)-1;
+					$lastNew = $last = count($array)-1;
 
 				// perform line of binary search
 				switch($lineNum)
@@ -132,7 +132,7 @@
 				echo "<tr align='center' valign='bottom'>";
 
 				for($LCV = 0; $LCV < count($array); $LCV++)
-				echo "<td width='52'>$LCV</td>";
+					echo "<td width='52'>$LCV</td>";
 					
 				echo "</tr></table>";
 
@@ -144,11 +144,11 @@
 					// Display array
 					for($LCV = 0; $LCV < count($array); $LCV++)
 					if($done && $LCV == $mid && $lineNum != 8)
-					echo "<td width='40' bgcolor=yellow>" . $array[$LCV] . "</td>";
+						echo "<td width='40' bgcolor=yellow>" . $array[$LCV] . "</td>";
 					elseif($LCV >= $firstNew && $LCV <= $lastNew)
-					echo "<td width='40' bgcolor=white>" . $array[$LCV] . "</td>";
+						echo "<td width='40' bgcolor=white>" . $array[$LCV] . "</td>";
 					else
-					echo "<td width='40' bgcolor=gray>" . $array[$LCV] . "</td>";
+						echo "<td width='40' bgcolor=gray>" . $array[$LCV] . "</td>";
 
 					echo "</tr></table>";
 						
@@ -163,7 +163,7 @@
 						{
 							echo "<td width='52'>";
 							if($LCV == $mid)
-							echo "&uarr;<br/>Found the Value!<br/>";
+								echo "&uarr;<br/>Found the Value!<br/>";
 							echo "&nbsp;<br/>";
 							echo "</td>";
 						}
@@ -174,9 +174,9 @@
 						{
 							echo "<td width='52'>";
 							if($LCV == $firstNew)
-							echo "&uarr;<br/>First<br/>";
+								echo "&uarr;<br/>First<br/>";
 							if($LCV == $lastNew)
-							echo "&uarr;<br/>Last<br/>";
+								echo "&uarr;<br/>Last<br/>";
 							if($midNew != -1)
 							{
 								if($LCV == $midNew)
@@ -191,11 +191,13 @@
 				else
 				{
 					for($LCV = 0; $LCV < count($array); $LCV++)
-					if($LCV == (-($mid) - 1))
-					echo "<td width='40' bgcolor=yellow>" . $array[$LCV] . "</td>";
-					else
-					echo "<td width='40' bgcolor=gray>" . $array[$LCV] . "</td>";
-
+					{
+						if($LCV == (-($mid) - 1))
+							echo "<td width='40' bgcolor=yellow>" . $array[$LCV] . "</td>";
+						else
+							echo "<td width='40' bgcolor=gray>" . $array[$LCV] . "</td>";
+					}
+					
 					echo "</tr></table>";
 						
 					echo "<table border='0' cellpadding='0' style='font-size:12pt;'>";
@@ -205,7 +207,7 @@
 					{
 						echo "<td width='52'>";
 						if($LCV == (-($mid) - 1))
-						echo "&uarr;<br/>Insert<br/>Here<br/>";
+							echo "&uarr;<br/>Insert<br/>Here<br/>";
 
 						echo "&nbsp;<br/></td>";
 					}
@@ -230,7 +232,7 @@
 							echo "<p>At the beginning of the while loop, First is compared to Last. Since First ($first) is still less than or equal to Last ($last), the while loop continues.</p>";
 						}
 						else
-						echo "<p>At the beginning of the while loop, First is compared to Last. Since First ($first) is not less than or equal to Last ($last), the while loop exits.</p>";
+							echo "<p>At the beginning of the while loop, First is compared to Last. Since First ($first) is not less than or equal to Last ($last), the while loop exits.</p>";
 						break;
 					case 2:
 						echo "<p>The first statement in the while loop calculates the mid-point between the <b>First</b> and <b>Last</b> index values, basically splitting the list of<br/>values in half.  In this example, the calculation is:</p><p style='padding-left:15;'><code>Mid = (First + Last) / 2 => $first + $last / 2 => $midNew</code></p><p>Remember that the index values are integers in this calculation, making it<br/>so the division will automatically truncate the value.</p><p>So in this example, the calculated <b>Mid</b> index is $midNew.</p>";
@@ -238,7 +240,7 @@
 					case 3:
 						echo "<p>You next make the comparison between the <b>key</b> value you're looking<br/>for (in this case $search) and the calculated <b>Mid</b> value (in this case $array[$mid]).</p>";
 						if($cond)
-						echo "<p>In this example, the <b>key</b> is greater than <b>Mid</b>, causing the<br/>comparison to succeed.  This causes the main clause of the if command to execute.</p>";
+							echo "<p>In this example, the <b>key</b> is greater than <b>Mid</b>, causing the<br/>comparison to succeed.  This causes the main clause of the if command to execute.</p>";
 						else
 						echo "<p>In this example, the <b>key</b> is less than <b>Mid</b>, causing the<br/>comparison to fail.  This causes the else clause of the if command to execute.</p>";
 						break;
@@ -251,9 +253,9 @@
 					case 5:
 						echo "<p>This step compares the <b>key</b> to the <b>Mid</b> index value again.</p>";
 						if($cond)
-						echo "<p>In this example, the <b>key</b> is less the <b>Mid</b> index value, so the<br/>comparison succeeds, causing the resultant assignment to be made (shown in<br/>the next step).</p>";
+							echo "<p>In this example, the <b>key</b> is less the <b>Mid</b> index value, so the<br/>comparison succeeds, causing the resultant assignment to be made (shown in<br/>the next step).</p>";
 						else
-						echo "<p>In this example, the <b>key</b> is less than <b>Mid</b>, causing the<br/>comparison to fail.  This causes the else clause of the if command to execute.</p>";
+							echo "<p>In this example, the <b>key</b> is less than <b>Mid</b>, causing the<br/>comparison to fail.  This causes the else clause of the if command to execute.</p>";
 						break;
 					case 6:
 						echo "<p>The assignment changes the value of <b>Last</b> to one less than <b>Mid</b>,<br/>netting the following result:</p>";
@@ -282,9 +284,9 @@
 				if($lineNum != -1)
 				{
 					if($lineNum >= 7)
-					printAlgo(intval($lineNum)+1);
+						printAlgo(intval($lineNum)+1);
 					else
-					printAlgo($lineNum);
+						printAlgo($lineNum);
 				}
 
 				// Pass variables to the next page
@@ -302,7 +304,7 @@
 							echo "<input type='hidden' name='search' value='" . $search . "'>";
 							echo "<input type='hidden' name='array' value='" . serialize($array) . "'>";
 							if(isset($_POST['insert']))
-							echo "<input type='hidden' name='insert' value='true'>";
+								echo "<input type='hidden' name='insert' value='true'>";
 							echo "<input type='hidden' name='done' value='true'>";
 							echo "<input type='hidden' name='first' value='" . $firstNew . "'>";
 							echo "<input type='hidden' name='mid' value='" . $midNew . "'>";
@@ -329,7 +331,7 @@
 								echo "New Key to search for: <input type='text' size='3' name='search' value='" . intval($_POST['search']) . "'>";
 								echo "<input type='hidden' name='array' value='" . serialize($array) . "'>";
 								if(isset($_POST['insert']))
-								echo "<input type='hidden' name='insert' value='true'>";
+									echo "<input type='hidden' name='insert' value='true'>";
 								echo "<input type='hidden' name='lineNum' value='0'>";
 								echo "<input type='hidden' name='first' value='0'>";
 								echo "<input type='hidden' name='mid' value='-1'>";
@@ -357,7 +359,7 @@
 						echo "New Key to search for: <input type='text' size='3' name='search' value='" . intval($_POST['search']) . "'>";
 						echo "<input type='hidden' name='array' value='" . serialize($array) . "'>";
 						if(isset($_POST['insert']))
-						echo "<input type='hidden' name='insert' value='true'>";
+							echo "<input type='hidden' name='insert' value='true'>";
 						echo "<input type='hidden' name='lineNum' value='0'>";
 						echo "<input type='hidden' name='first' value='0'>";
 						echo "<input type='hidden' name='mid' value='-1'>";
@@ -376,7 +378,7 @@
 					echo "<input type='hidden' name='search' value='" . $search . "'>";
 					echo "<input type='hidden' name='array' value='" . serialize($array) . "'>";
 					if(isset($_POST['insert']))
-					echo "<input type='hidden' name='insert' value='true'>";
+						echo "<input type='hidden' name='insert' value='true'>";
 					echo "<input type='hidden' name='lineNum' value='". $lineNumNew . "'>";
 					echo "<input type='hidden' name='first' value='" . $firstNew . "'>";
 					echo "<input type='hidden' name='mid' value='" . $midNew . "'>";
@@ -391,17 +393,17 @@
 				echo "<form action='index.php' method='POST'>";
 
 				if(isset($_POST['search']))
-				echo "<input type='hidden' name='search' value='" . $_POST['search'] . "'>";
+					echo "<input type='hidden' name='search' value='" . $_POST['search'] . "'>";
 
 				if(isset($_POST['array']))
-				echo "<input type='hidden' name='array' value='" . $_POST['array'] . "'>";
+					echo "<input type='hidden' name='array' value='" . $_POST['array'] . "'>";
 
 				echo "<input type='hidden' name='binDebug' value='true'>";
 				echo "<input type='submit' value='Return to Simulator Selection Menu'>";
 				echo "</form>";
 			}
 			else
-			header("Location: index.php");
+				header("Location: index.php");
 
 			function printAlgo($lineNum)
 			{
@@ -412,9 +414,9 @@
 				for($LCV = 0; $LCV < count($output); $LCV++)
 				{
 					if($LCV == $lineNum)
-					echo $highlighted[$LCV];
+						echo $highlighted[$LCV];
 					else
-					echo $output[$LCV];
+						echo $output[$LCV];
 				}
 				echo "</pre>";
 				echo "</td></tr></table>";

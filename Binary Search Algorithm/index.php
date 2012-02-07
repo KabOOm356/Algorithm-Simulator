@@ -30,7 +30,7 @@
 						$arrayString = "";
 
 						foreach($array as &$val)
-						$arrayString = $arrayString . $val . " ";
+							$arrayString = $arrayString . $val . " ";
 
 						$arrayString = trim($arrayString);
 							
@@ -42,10 +42,10 @@
 					if(isset($_POST['search']))
 					{
 						if(!is_numeric($_POST['search']))
-						echo "The search value was not numeric!<br/>";
+							echo "The search value was not numeric!<br/>";
 					}
 					else
-					echo "The search value was not set!<br/>";
+						echo "The search value was not set!<br/>";
 
 					echo "</font>";
 				}
@@ -56,9 +56,9 @@
 					echo "<font color='red'><b>The following errors occurred during the insertion simulation:</b><br/>";
 
 					if(isset($_POST['array']))
-					$_POST['num'] = count(unserialize($_POST['array']));
+						$_POST['num'] = count(unserialize($_POST['array']));
 					else
-					echo "The array was not set!<br/>";
+						echo "The array was not set!<br/>";
 
 					if(isset($_POST['insert']))
 					{
@@ -66,7 +66,7 @@
 						echo "The insert value was not numeric!<br/>";
 					}
 					else
-					echo "The insert value was not set!<br/>";
+						echo "The insert value was not set!<br/>";
 
 					if(isset($_POST['index']))
 					{
@@ -74,7 +74,7 @@
 						echo "The index value was not numeric!<br/>";
 					}
 					else
-					echo "The index value was not set!<br/>";
+						echo "The index value was not set!<br/>";
 
 					echo "</font>";
 				}
@@ -112,10 +112,12 @@
 							$diff = abs($_POST['upperBound'] - $_POST['lowerBound']);
 
 							if(is_numeric($_POST['num']))
-							if($diff < $_POST['num'])
 							{
-								echo "The difference between the upper bound and lower bound is $diff and is too small to generate a unique array with {$_POST['num']} values<br/>";
-								$start = false;
+								if($diff < $_POST['num'])
+								{
+									echo "The difference between the upper bound and lower bound is $diff and is too small to generate a unique array with {$_POST['num']} values<br/>";
+									$start = false;
+								}
 							}
 						}
 					}
@@ -131,38 +133,40 @@
 							$array = explode(" ", $_POST['array']);
 
 							if(is_numeric($_POST['num']))
-							if(count($array) != $_POST['num'])
 							{
-								echo "Number of values in the specified array do not equal the number of values expected!<br/>";
-								echo "Number of values expected: " . $_POST['num'] . "<br/>";
-								echo "Number of values recieved: " . count($array) . "<br/>";
-								$start = false;
-							}
-							else
-							{
-								$array_unique = array_unique($array);
-
-								if(count($array_unique) != $_POST['num'])
+								if(count($array) != $_POST['num'])
 								{
-									echo "There are duplicate values in the provided array!<br/>";
+									echo "Number of values in the specified array do not equal the number of values expected!<br/>";
+									echo "Number of values expected: " . $_POST['num'] . "<br/>";
+									echo "Number of values recieved: " . count($array) . "<br/>";
 									$start = false;
-										
-									$occurances = array_count_values($array);
-										
-									for($LCV = 0; $LCV < count($array); $LCV++)
-									{
-										if($occurances[$array[$LCV]] > 1)
-										echo "Position " . ($LCV+1) . " contains the duplicate number: {$array[$LCV]}<br/>";
-									}
 								}
 								else
 								{
-									for($LCV = 0; $LCV < count($array_unique); $LCV++)
+									$array_unique = array_unique($array);
+
+									if(count($array_unique) != $_POST['num'])
 									{
-										if(!is_numeric($array_unique[$LCV]))
+										echo "There are duplicate values in the provided array!<br/>";
+										$start = false;
+											
+										$occurances = array_count_values($array);
+											
+										for($LCV = 0; $LCV < count($array); $LCV++)
 										{
-											echo "The value at index " . ($LCV+1) . " of the provided array is not a number!<br/>";
-											$start = false;
+											if($occurances[$array[$LCV]] > 1)
+												echo "Position " . ($LCV+1) . " contains the duplicate number: {$array[$LCV]}<br/>";
+										}
+									}
+									else
+									{
+										for($LCV = 0; $LCV < count($array_unique); $LCV++)
+										{
+											if(!is_numeric($array_unique[$LCV]))
+											{
+												echo "The value at index " . ($LCV+1) . " of the provided array is not a number!<br/>";
+												$start = false;
+											}
 										}
 									}
 								}
@@ -187,7 +191,7 @@
 					}
 
 					if(!$start)
-					echo "<b>Please review the selections below and resubmit the form</b>";
+						echo "<b>Please review the selections below and resubmit the form</b>";
 						
 					echo "</font></p>";
 				}
@@ -254,29 +258,29 @@
 						if(isset($_POST['lowerBound']))
 						{
 							if(is_numeric($_POST['lowerBound']))
-							echo "<input type='text' name='lowerBound' value='" . $_POST['lowerBound'] . "'> to ";
+								echo "<input type='text' name='lowerBound' value='" . $_POST['lowerBound'] . "'> to ";
 							else
-							echo "<input type='text' name='lowerBound'> to ";
+								echo "<input type='text' name='lowerBound'> to ";
 						}
 						else
-						echo "<input type='text' name='lowerBound'> to ";
+							echo "<input type='text' name='lowerBound'> to ";
 							
 						if(isset($_POST['upperBound']))
 						{
 							if(is_numeric($_POST['upperBound']))
-							echo "<input type='text' name='upperBound' value='" . $_POST['upperBound'] . "'> , or<br/><br/>";
+								echo "<input type='text' name='upperBound' value='" . $_POST['upperBound'] . "'> , or<br/><br/>";
 							else
-							echo "<input type='text' name='upperBound'> , or<br/><br/>";
+								echo "<input type='text' name='upperBound'> , or<br/><br/>";
 						}
 						else
-						echo "<input type='text' name='upperBound'> , or<br/><br/>";
+							echo "<input type='text' name='upperBound'> , or<br/><br/>";
 
 						echo "<input type='radio' name='values' value='specified'> Specific numeric values:";
 
 						if(!empty($_POST['array']))
-						echo "<input type='text' name='array' value='" . $_POST['array'] . "'><br/><br/>";
+							echo "<input type='text' name='array' value='" . $_POST['array'] . "'><br/><br/>";
 						else
-						echo "<input type='text' name='array'><br/><br/>";
+							echo "<input type='text' name='array'><br/><br/>";
 					}
 					else
 					{
@@ -285,29 +289,29 @@
 						if(isset($_POST['lowerBound']))
 						{
 							if(is_numeric($_POST['lowerBound']))
-							echo "<input type='text' name='lowerBound' value='" . $_POST['lowerBound'] . "'> to ";
+								echo "<input type='text' name='lowerBound' value='" . $_POST['lowerBound'] . "'> to ";
 							else
-							echo "<input type='text' name='lowerBound'> to ";
+								echo "<input type='text' name='lowerBound'> to ";
 						}
 						else
-						echo "<input type='text' name='lowerBound'> to ";
+							echo "<input type='text' name='lowerBound'> to ";
 							
 						if(isset($_POST['upperBound']))
 						{
 							if(is_numeric($_POST['upperBound']))
-							echo "<input type='text' name='upperBound' value='" . $_POST['upperBound'] . "'> , or<br/><br/>";
+								echo "<input type='text' name='upperBound' value='" . $_POST['upperBound'] . "'> , or<br/><br/>";
 							else
-							echo "<input type='text' name='upperBound'> , or<br/><br/>";
+								echo "<input type='text' name='upperBound'> , or<br/><br/>";
 						}
 						else
-						echo "<input type='text' name='upperBound'> , or<br/><br/>";
+							echo "<input type='text' name='upperBound'> , or<br/><br/>";
 
 						echo "<input type='radio' name='values' value='specified' Checked> Specific numeric values:";
 
 						if(!empty($_POST['array']))
-						echo "<input type='text' name='array' value='" . $_POST['array'] . "'><br/><br/>";
+							echo "<input type='text' name='array' value='" . $_POST['array'] . "'><br/><br/>";
 						else
-						echo "<input type='text' name='array'><br/><br/>";
+							echo "<input type='text' name='array'><br/><br/>";
 					}
 				}
 				else
@@ -317,45 +321,45 @@
 					if(isset($_POST['lowerBound']))
 					{
 						if(is_numeric($_POST['lowerBound']))
-						echo "<input type='text' name='lowerBound' value='" . $_POST['lowerBound'] . "'> to ";
+							echo "<input type='text' name='lowerBound' value='" . $_POST['lowerBound'] . "'> to ";
 						else
-						echo "<input type='text' name='lowerBound'> to ";
+							echo "<input type='text' name='lowerBound'> to ";
 					}
 					else
-					echo "<input type='text' name='lowerBound'> to ";
+						echo "<input type='text' name='lowerBound'> to ";
 
 					if(isset($_POST['upperBound']))
 					{
 						if(is_numeric($_POST['upperBound']))
-						echo "<input type='text' name='upperBound' value='" . $_POST['upperBound'] . "'> , or<br/><br/>";
+							echo "<input type='text' name='upperBound' value='" . $_POST['upperBound'] . "'> , or<br/><br/>";
 						else
-						echo "<input type='text' name='upperBound'> , or<br/><br/>";
+							echo "<input type='text' name='upperBound'> , or<br/><br/>";
 					}
 					else
-					echo "<input type='text' name='upperBound'> , or<br/><br/>";
+						echo "<input type='text' name='upperBound'> , or<br/><br/>";
 						
 					echo "<input type='radio' name='values' value='specified'> Specific numeric values:";
 						
 					if(!empty($_POST['array']))
-					echo "<input type='text' name='array' value='" . $_POST['array'] . "'><br/><br/>";
+						echo "<input type='text' name='array' value='" . $_POST['array'] . "'><br/><br/>";
 					else
-					echo "<input type='text' name='array'><br/><br/>";
+						echo "<input type='text' name='array'><br/><br/>";
 				}
 
 				if(isset($_POST['insert']))
-				echo "<input type='checkbox' name='insert' Checked> Insert searched-for values that aren't already in the array<br/><br/>";
+					echo "<input type='checkbox' name='insert' Checked> Insert searched-for values that aren't already in the array<br/><br/>";
 				else
-				echo "<input type='checkbox' name='insert'> Insert searched-for values that aren't already in the array<br/><br/>";
+					echo "<input type='checkbox' name='insert'> Insert searched-for values that aren't already in the array<br/><br/>";
 
 				if(isset($_POST['search']))
 				{
 					if(is_numeric($_POST['search']))
-					echo "Value to initially search for: <input type='text' name='search' value='" . $_POST['search'] . "'><br/><br/>";
+						echo "Value to initially search for: <input type='text' name='search' value='" . $_POST['search'] . "'><br/><br/>";
 					else
-					echo "Value to initially search for: <input type='text' name='search'><br/><br/>";
+						echo "Value to initially search for: <input type='text' name='search'><br/><br/>";
 				}
 				else
-				echo "Value to initially search for: <input type='text' name='search'><br/><br/>";
+					echo "Value to initially search for: <input type='text' name='search'><br/><br/>";
 
 				echo "<input type='hidden' name='currentLine' value='0'>";
 				echo "<input type='Submit' name='run' value='Run Simulator'>  <input type='reset' value='Reset'>";
@@ -410,7 +414,7 @@
 					{
 						echo $array[$LCV];
 						if($LCV != (count($array)-1))
-						echo ", ";
+							echo ", ";
 					}
 				}
 				else
@@ -418,8 +422,9 @@
 					$array = explode(" ", $_POST['array']);
 					echo "Array Generation: User Specified<br/>";
 					echo "Array: ";
+					
 					for($LCV = 0; $LCV < count($array); $LCV++)
-					$array[$LCV] = intval($array[$LCV]);
+						$array[$LCV] = intval($array[$LCV]);
 						
 					sort($array);
 						
@@ -427,16 +432,16 @@
 					{
 						echo $array[$LCV];
 						if($LCV != (count($array)-1))
-						echo ", ";
+							echo ", ";
 					}
 				}
 
 				echo "<br/><br/>Insert value if it does not exist in the array: ";
 
 				if(isset($_POST['insert']))
-				echo "True<br/><br/>";
+					echo "True<br/><br/>";
 				else
-				echo "False<br/><br/>";
+					echo "False<br/><br/>";
 					
 				echo "Value to search for: " . intval($_POST['search']);
 
@@ -450,7 +455,7 @@
 				echo "<input type='hidden' name='upperBound' value='" . intval($_POST['upperBound']) . "'>";
 				echo "<input type='hidden' name='lowerBound' value='" . intval($_POST['lowerBound']) . "'>";
 				if(isset($_POST['insert']))
-				echo "<input type='hidden' name='insert' value='true'>";
+					echo "<input type='hidden' name='insert' value='true'>";
 				echo "<input type='submit' value='Return'>";
 				echo "</form>";
 
@@ -464,7 +469,7 @@
 					echo "<input type='hidden' name='upperBound' value='" . $_POST['upperBound'] . "'>";
 					echo "<input type='hidden' name='lowerBound' value='" . $_POST['lowerBound'] . "'>";
 					if(isset($_POST['insert']))
-					echo "<input type='hidden' name='insert' value='true'>";
+						echo "<input type='hidden' name='insert' value='true'>";
 					echo "<input type='hidden' name='run' value='true'>";
 					echo "<input type='submit' value='Regenerate Array'>";
 					echo "</form>";
@@ -474,7 +479,7 @@
 				echo "<input type='hidden' name='search' value='" . intval($_POST['search']) . "'>";
 				echo "<input type='hidden' name='array' value='" . serialize($array) . "'>";
 				if(isset($_POST['insert']))
-				echo "<input type='hidden' name='insert' value='true'>";
+					echo "<input type='hidden' name='insert' value='true'>";
 				echo "<input type='hidden' name='lineNum' value='0'>";
 				echo "<input type='hidden' name='first' value='0'>";
 				echo "<input type='hidden' name='mid' value='-1'>";
