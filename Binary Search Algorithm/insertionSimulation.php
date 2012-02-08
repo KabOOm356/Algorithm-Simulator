@@ -11,8 +11,10 @@
 			<?php
 			if(isset($_POST['array']) && isset($_POST['insert']) && is_numeric($_POST['insert']) && isset($_POST['index']))
 			{
+				// Heading 1
 				echo "<p><h1><b>Insertion Simulator</b></h1></p>";
 
+				// Display the last time the file was updated
 				echo '<p>This file was last updated: ' . date ('F d Y H:i:s.', getlastmod()) . "</p>";
 
 				$done = false;
@@ -58,7 +60,7 @@
 
 				echo "<p>Inserting the value $insert in index position $index:</p>";
 
-				// Print the above comments
+				// Print the comments that appear above the array
 				if(isset($_POST['correct']))
 				{
 					if($done)
@@ -107,7 +109,7 @@
 					}
 				}
 
-				// Print Array
+				// Print the array
 
 				echo "<table border='0' cellpadding='0' style='font-size:12pt;'>";
 				echo "<tr align='center' valign='bottom'>";
@@ -144,7 +146,7 @@
 						elseif($LCV > $currentIndex)
 							echo "<td width='40' bgcolor=green>" . $aArray[$LCV] . "</td>";
 						else
-						echo "<td width='40' bgcolor=white>" . $aArray[$LCV] . "</td>";
+							echo "<td width='40' bgcolor=white>" . $aArray[$LCV] . "</td>";
 					}
 				}
 					
@@ -184,7 +186,7 @@
 
 				echo "</tr></table>";
 
-				// print the bottom comments
+				// Print the comments that appear below the array
 				if(isset($_POST['correct']))
 				{
 					if($done)
@@ -256,7 +258,7 @@
 			}
 			elseif(isset($_POST['array']) || isset($_POST['insert']) || isset($_POST['index']))
 			{
-				// debugging
+				// Some of the required variables were not set, alert the user and begin debugging
 				echo "<b><font color='red'>One or all of the required variables were not set properly.<br/><br/>You must return to the Simulator Selection Menu to get the error and restart</font><br/><br/>";
 				echo "<form action='index.php' method='POST'>";
 				if(isset($_POST['index']))
@@ -269,7 +271,7 @@
 				echo "<input type='submit' value='Return to Simulator Selection Menu'>";
 				echo "</form>";
 			}
-			else
+			else // Default case that no variables are being passed, assuming the user just went to this link so redirect them to the main form
 				header("Location: index.php");
 			?></td>
 		</tr>

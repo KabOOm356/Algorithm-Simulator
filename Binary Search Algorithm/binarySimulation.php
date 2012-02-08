@@ -9,12 +9,16 @@
 		<tr>
 			<td align='center'>
 			<?php
+			// Check if the required variables are set
 			if(isset($_POST['search']) && is_numeric($_POST['search']) && isset($_POST['array']))
 			{
+				// Heading 1
 				echo "<p><h1><b>Binary Search Simulator</b></h1></p>";
 
+				// Display the last time the file was updated
 				echo '<p>This file was last updated: ' . date ('F d Y H:i:s.', getlastmod()) . "</p>";
 
+				// Check if the algorithm has completed
 				if(isset($_POST['done']))
 				{
 					$done = true;
@@ -28,62 +32,82 @@
 
 				// Number to search for
 				$search = intval($_POST['search']);
+				
+				// Read in the array
+				// TODO This is probably not necessary
 				$in = unserialize($_POST['array']);
 				$array = "";
+				
 				for($LCV = 0; $LCV < count($in); $LCV++)
 				{
 					if($LCV != count($in))
 						$array = $array . $in[$LCV] . " ";
 					else
-						$array = $array . $in[$LCV];
-						
+						$array = $array . $in[$LCV];	
 				}
+				
 				$array = trim($array);
+				
 				// The array
 				$array = explode(" ", $array);
 
+				// Display the number to be searched for
 				echo "Searching for the value $search:<br/><br/>";
 
+				// Read in variables
 				$firstNew = $first = intval($_POST['first']);
 				$midNew = $mid = intval($_POST['mid']);
 				$lastNew = $last = intval($_POST['last']);
+				
 				if($last == -2)
 					$lastNew = $last = count($array)-1;
 
-				// perform line of binary search
+				// perform the current line of the binary search algorithm
 				switch($lineNum)
 				{
+					// Line number = 0
+					// int binarySearch (int sortedArray[], int First, int Last, int key) {
 					case 0:
 						$lineNumNew++;
 						break;
+					// Line number = 1
+					// while (First <= Last) {
 					case 1:
+						// Make sure last and first are in bounds
 						if($last != -1 && $first < count($array))
 						{
+							// Test if the while condition is true or false
 							if($array[$first] <= $array[$last])
 							{
+								// Increment the new line
 								$lineNumNew++;
 								$cond = true;
 							}
 							else
 							{
+								// Jump to the new line
 								$lineNumNew = 8;
 								$cond = false;
 							}
 						}
-						else
+						else // Special case
 						{
 							$lineNumNew = 8;
 							$cond = false;
 						}
 						break;
+					// Line number = 2
+					// int Mid = (First + Last) / 2;
 					case 2:
+						
 						$midNew = floor(($first + $last) / 2);
 						$lineNumNew++;
 						break;
+					// Line number = 3
+					// if (key > sortedArray[Mid])
 					case 3:
 						if($search > $array[$mid])
 						{
-								
 							$lineNumNew++;
 							$cond = true;
 						}
@@ -93,10 +117,14 @@
 							$cond = false;
 						}
 						break;
+					// Line number = 4
+					// First = Mid + 1;
 					case 4:
 						$firstNew = $mid + 1;
 						$lineNumNew = 1;
 						break;
+					// Line number = 5
+					// else if (key < sortedArray[Mid])
 					case 5:
 						if($search < $array[$mid])
 						{
@@ -109,13 +137,19 @@
 							$lineNumNew = 7;
 						}
 						break;
+					// Line number = 6
+					// Last = Mid - 1;
 					case 6:
 						$lastNew = $mid - 1;
 						$lineNumNew = 1;
 						break;
+					// Line number = 7
+					// return Mid;
 					case 7:
 						$done = true;
 						break;
+					// Line number = 8
+					// return -(First + 1);
 					case 8:
 						$midNew = -($first + 1);
 						$done = true;
@@ -124,13 +158,15 @@
 
 				// add extra index for showing where to insert
 				if($lineNum == -1 && (-($mid) - 1) == count($array))
-				$array[] = "";
+					$array[] = "";
 
-				// Print array
-
+				// TODO Update these to look better
+				// Display the graphics to the user
+				
 				echo "<table border='0' cellpadding='0' style='font-size:12pt;'>";
 				echo "<tr align='center' valign='bottom'>";
 
+				// Print the indexes numbers
 				for($LCV = 0; $LCV < count($array); $LCV++)
 					echo "<td width='52'>$LCV</td>";
 					
@@ -139,16 +175,20 @@
 				echo "<table border='1' cellpadding='5' style='font-size:18pt;'>";
 				echo "<tr align='center'>";
 
+				// Check if the line number != -1
+				// The line number equals -1 when index where to insert the value to search for has been found
 				if($lineNum != -1)
 				{
 					// Display array
 					for($LCV = 0; $LCV < count($array); $LCV++)
-					if($done && $LCV == $mid && $lineNum != 8)
-						echo "<td width='40' bgcolor=yellow>" . $array[$LCV] . "</td>";
-					elseif($LCV >= $firstNew && $LCV <= $lastNew)
-						echo "<td width='40' bgcolor=white>" . $array[$LCV] . "</td>";
-					else
-						echo "<td width='40' bgcolor=gray>" . $array[$LCV] . "</td>";
+					{
+						if($done && $LCV == $mid && $lineNum != 8)
+							echo "<td width='40' bgcolor=yellow>" . $array[$LCV] . "</td>";
+						elseif($LCV >= $firstNew && $LCV <= $lastNew)
+							echo "<td width='40' bgcolor=white>" . $array[$LCV] . "</td>";
+						else
+							echo "<td width='40' bgcolor=gray>" . $array[$LCV] . "</td>";
+					}
 
 					echo "</tr></table>";
 						
@@ -159,6 +199,7 @@
 						
 					if($done && $lineNum != 8)
 					{
+						// Output that the value has been found and output an arrow pointing to the index where it was found
 						for($LCV = -1; $LCV < count($array)+1; $LCV++)
 						{
 							echo "<td width='52'>";
@@ -170,6 +211,7 @@
 					}
 					else
 					{
+						// Display arrows pointing to the indexes of variables first, mid, and last
 						for($LCV = -1; $LCV < count($array)+1; $LCV++)
 						{
 							echo "<td width='52'>";
@@ -188,8 +230,9 @@
 						}
 					}
 				}
-				else
+				else // Highlight the location of where the value to search should be inserted
 				{
+					// Display the highlighted index
 					for($LCV = 0; $LCV < count($array); $LCV++)
 					{
 						if($LCV == (-($mid) - 1))
@@ -202,7 +245,8 @@
 						
 					echo "<table border='0' cellpadding='0' style='font-size:12pt;'>";
 					echo "<tr align='center' valign='top'>";
-						
+					
+					// Display the arrow to where the search for value should be inserted
 					for($LCV = 0; $LCV < count($array); $LCV++)
 					{
 						echo "<td width='52'>";
@@ -214,9 +258,9 @@
 				}
 
 				echo "</tr></table>";
-
-				// use switch to display comments
-
+				
+				
+				// Display the comments based on the line number
 				switch($lineNum)
 				{
 					case 0:
@@ -224,12 +268,13 @@
 						echo "<p>In this example, <b>First</b> is set to index position $first, and <b>Last</b> is<br/>set to index position $last, allowing us to search the entire array.  Note that<br/><b>Last</b> should always point to the position of the <i>actual last element</i><br/>in which to search for the key.  It should never be equal to the number of<br/>elements in the array.</p>";
 						break;
 					case 1:
+						// Check if the condition was true on line one to print the appropriate comment accordingly
 						if($cond)
 						{
 							if($first == 0 && $last == count($array)-1)
-							echo "<p>The first step in the function's algorithm is to verify that the First value ($first) is less than or equal to Last value ($last). Since<br/>this test is true in the case, we enter the code inside the while loop.</p>";
+								echo "<p>The first step in the function's algorithm is to verify that the First value ($first) is less than or equal to Last value ($last). Since<br/>this test is true in the case, we enter the code inside the while loop.</p>";
 							else
-							echo "<p>At the beginning of the while loop, First is compared to Last. Since First ($first) is still less than or equal to Last ($last), the while loop continues.</p>";
+								echo "<p>At the beginning of the while loop, First is compared to Last. Since First ($first) is still less than or equal to Last ($last), the while loop continues.</p>";
 						}
 						else
 							echo "<p>At the beginning of the while loop, First is compared to Last. Since First ($first) is not less than or equal to Last ($last), the while loop exits.</p>";
@@ -242,7 +287,7 @@
 						if($cond)
 							echo "<p>In this example, the <b>key</b> is greater than <b>Mid</b>, causing the<br/>comparison to succeed.  This causes the main clause of the if command to execute.</p>";
 						else
-						echo "<p>In this example, the <b>key</b> is less than <b>Mid</b>, causing the<br/>comparison to fail.  This causes the else clause of the if command to execute.</p>";
+							echo "<p>In this example, the <b>key</b> is less than <b>Mid</b>, causing the<br/>comparison to fail.  This causes the else clause of the if command to execute.</p>";
 						break;
 					case 4:
 						echo "<p>The assignment changes the value of <b>First</b> to one more than <b>Mid</b>,<br/>netting the following result:</p>";
@@ -281,6 +326,7 @@
 						break;
 				}
 
+				// Print the binary search algorithm code snippet with the current line highlighted
 				if($lineNum != -1)
 				{
 					if($lineNum >= 7)
@@ -374,6 +420,7 @@
 				}
 				else
 				{
+					// Continue to next step
 					echo "<form action='" . $_SERVER['PHP_SELF'] . "' method='POST'>";
 					echo "<input type='hidden' name='search' value='" . $search . "'>";
 					echo "<input type='hidden' name='array' value='" . serialize($array) . "'>";
@@ -389,6 +436,7 @@
 			}
 			elseif(isset($_POST['search']) || isset($_POST['array']))
 			{
+				// Some of the required variables were not set, alert the user and begin debugging
 				echo "<b><font color='red'>One or all of the required variables were not set properly.<br/><br/>You must return to the Simulator Selection Menu to get the error and restart</font><br/><br/>";
 				echo "<form action='index.php' method='POST'>";
 
@@ -402,9 +450,10 @@
 				echo "<input type='submit' value='Return to Simulator Selection Menu'>";
 				echo "</form>";
 			}
-			else
+			else // Default case that no variables are being passed, assuming the user just went to this link so redirect them to the main form
 				header("Location: index.php");
 
+			// Prints a code snippet from the binary search algorithm with the line number highlighted
 			function printAlgo($lineNum)
 			{
 				$output = array("int binarySearch (int sortedArray[], int First, int Last, int key) {<br/>", "  while (First &lt;= Last) {<br/>", "    int Mid = (First + Last) / 2;<br/>", "    if (key &gt; sortedArray[Mid])<br/>", "      First = Mid + 1;<br/>", "    else if (key &lt; sortedArray[Mid])<br/>", "      Last = Mid - 1;<br/>", "    else<br/>", "      return Mid;<br/>  }<br/>", "     return -(First + 1);<br/>}");

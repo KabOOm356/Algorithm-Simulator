@@ -4,4 +4,15 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Hashing Algorithm Simulator</title>
 </head>
+<body bgcolor="gray">
+<table border='1' cellpadding='20' align='center'>
+	<tr>
+		<td align='center'>
+			<?php
+				echo "<p><h1><font color='yellow'>This is still a work in progress!</font></h1></p>";
+			?>
+		</td>
+	</tr>
+</table>
+</body>
 </html>
