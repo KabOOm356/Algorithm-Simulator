@@ -12,10 +12,139 @@
 	$start=false;
 	
 	// TODO Add debugging here
-	if(isset($_POST['submit']) /* || isset($_POST['debug'] */)
+	if(isset($_POST['run']) /* || isset($_POST['debug'] */)
 	{
 		$start = true;
 		// TODO Check user input;  If there is an error or debugging is on, print the error and set start to false
+		if(isset($_POST['run']))
+		{
+			echo "<p><font color=red>";
+			
+			// Check if the number of values in the array was set
+			if(empty($_POST['num']))
+			{
+				$start = false;
+				echo "Number of initial values in array is not set!<br/>";
+			}
+			
+			// Check if the way the values are generated is set
+			if(empty($_POST['values']))
+			{
+				$start = false;
+				echo "Initial values type not set!<br/>";
+			}
+			elseif($_POST['values'] == 'random') // If the user wants the values to be generated randomly
+			{
+				// Check if the user has entered a number for the lower bound
+				if(!is_numeric($_POST['lowerBound']))
+				{
+					echo "Random lower bound is not an integer!<br/>";
+					$start = false;
+				}
+			
+				// Check if the user has entered a number for the upper bound
+				if(!is_numeric($_POST['upperBound']))
+				{
+					echo "Random upper bound is not an integer!<br/>";
+					$start = false;
+				}
+			
+				if(is_numeric($_POST['upperBound']) && is_numeric($_POST['lowerBound']))
+				{
+					// Calculate the difference between the two bounds
+					$diff = abs($_POST['upperBound'] - $_POST['lowerBound']);
+						
+					if(is_numeric($_POST['num']))
+					{
+						// Check if it is possible to generate enough unique values for the array
+						if($diff < $_POST['num'])
+						{
+							echo "The difference between the upper bound and lower bound is $diff and is too small to generate a unique array with {$_POST['num']} values<br/>";
+							$start = false;
+						}
+					}
+				}
+			}
+			elseif($_POST['values'] == 'specified') // The user wants to use an array they enter
+			{
+				// Check if the user has specified an array
+				if(empty($_POST['array']))
+				{
+					echo "Array values are not set!<br/>";
+					$start = false;
+				}
+				else
+				{
+					// Split the array by each space
+					$array = explode(" ", $_POST['array']);
+					
+					if(is_numeric($_POST['num']))
+					{
+						// Check if the user created an array that is the same size they specified
+						if(count($array) != $_POST['num'])
+						{
+							echo "Number of values in the specified array do not equal the number of values expected!<br/>";
+							echo "Number of values expected: " . $_POST['num'] . "<br/>";
+							echo "Number of values recieved: " . count($array) . "<br/>";
+							$start = false;
+						}
+						else
+						{
+							// Create an array that has only unique values in it from the array
+							// Essentially removes the duplicates from the array
+							$array_unique = array_unique($array);
+							
+							// Check if the unique array is still the same size as the user specified
+							// Checks for duplicates
+							if(count($array_unique) != $_POST['num'])
+							{
+								echo "There are duplicate values in the provided array!<br/>";
+								$start = false;
+								
+								// Get the number of times a value occurs in the array
+								$occurances = array_count_values($array);
+								
+								for($LCV = 0; $LCV < count($array); $LCV++)
+								{
+									// Check if the number of times a value occurs is more than once
+									if($occurances[$array[$LCV]] > 1)
+										echo "Position " . ($LCV+1) . " contains the duplicate number: {$array[$LCV]}<br/>";
+								}
+							}
+							else
+							{
+								for($LCV = 0; $LCV < count($array_unique); $LCV++)
+								{
+									// Check if each value provided is a number
+									if(!is_numeric($array_unique[$LCV]))
+									{
+										echo "The value at index " . ($LCV+1) . " of the provided array is not a number!<br/>";
+										$start = false;
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+			else
+			{
+				echo "Variable values is not an expected value<br/>";
+				$start = false;
+			}
+			
+			// Check if there were any errors with the user input
+			if(!$start)
+				echo "<b>Please review the selections below and resubmit the form</b>";
+			
+			echo "</font></p>";
+		}
+		/*
+		elseif(isset($_POST['debug']))
+		{
+			
+		}
+		 */
 	}
 	
 	if(!$start) // If there was an error or the user has not filled out the form yet show the form
