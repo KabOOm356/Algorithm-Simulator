@@ -48,22 +48,6 @@
 					echo "Random upper bound is not an integer!<br/>";
 					$start = false;
 				}
-			
-				if(is_numeric($_POST['upperBound']) && is_numeric($_POST['lowerBound']))
-				{
-					// Calculate the difference between the two bounds
-					$diff = abs($_POST['upperBound'] - $_POST['lowerBound']);
-						
-					if(is_numeric($_POST['num']))
-					{
-						// Check if it is possible to generate enough unique values for the array
-						if($diff < $_POST['num'])
-						{
-							echo "The difference between the upper bound and lower bound is $diff and is too small to generate a unique array with {$_POST['num']} values<br/>";
-							$start = false;
-						}
-					}
-				}
 			}
 			elseif($_POST['values'] == 'specified') // The user wants to use an array they enter
 			{
@@ -90,37 +74,13 @@
 						}
 						else
 						{
-							// Create an array that has only unique values in it from the array
-							// Essentially removes the duplicates from the array
-							$array_unique = array_unique($array);
-							
-							// Check if the unique array is still the same size as the user specified
-							// Checks for duplicates
-							if(count($array_unique) != $_POST['num'])
+							for($LCV = 0; $LCV < count($array); $LCV++)
 							{
-								echo "There are duplicate values in the provided array!<br/>";
-								$start = false;
-								
-								// Get the number of times a value occurs in the array
-								$occurances = array_count_values($array);
-								
-								for($LCV = 0; $LCV < count($array); $LCV++)
+								// Check if each value provided is a number
+								if(!is_numeric($array[$LCV]))
 								{
-									// Check if the number of times a value occurs is more than once
-									if($occurances[$array[$LCV]] > 1)
-										echo "Position " . ($LCV+1) . " contains the duplicate number: {$array[$LCV]}<br/>";
-								}
-							}
-							else
-							{
-								for($LCV = 0; $LCV < count($array_unique); $LCV++)
-								{
-									// Check if each value provided is a number
-									if(!is_numeric($array_unique[$LCV]))
-									{
-										echo "The value at index " . ($LCV+1) . " of the provided array is not a number!<br/>";
-										$start = false;
-									}
+									echo "The value at index " . ($LCV+1) . " of the provided array is not a number!<br/>";
+									$start = false;
 								}
 							}
 						}
@@ -292,7 +252,97 @@
 	}
 	else // If the user has filled out the form and the input was properly entered
 	{
-		// TODO Show a confirmation screen that if accepted continues on to the simulation
+		// Header 1
+		echo "<h1>Input Summary</h1>";
+		
+		// Display the specified size of the array
+		echo "Size of array: " . $_POST['num'] . "<br/><br/>";
+		
+		// If the user specified to generate a random array
+		if($_POST['values'] == 'random')
+		{
+			// Display that the user wants a random array
+			echo "Array Generation: Random<br/>";
+				
+			// Display the lower bound of the random values in the array
+			echo "Lower Bound: " . intval($_POST['lowerBound']) . "<br/>";
+				
+			// Display the upper bound of the random values in the array
+			echo "Upper Bound: " . intval($_POST['upperBound']) . "<br/>";
+			
+			// Generate a a random array
+			for($LCV = 0; $LCV < $_POST['num']; $LCV++)
+				$array[$LCV] = rand($_POST['lowerBound'], $_POST['upperBound']);
+			
+			// Shuffle the array
+			shuffle($array);
+		
+			echo "<br/>Array: ";
+				
+			// Display the array to the user
+			for($LCV = 0; $LCV < count($array); $LCV++)
+			{
+				echo $array[$LCV];
+				if($LCV != (count($array)-1))
+					echo ", ";
+			}
+		}
+		else // The user specified an array
+		{
+			// Split the string array by spaces
+			$array = explode(" ", $_POST['array']);
+			
+			echo "Array Generation: User Specified<br/>";
+			echo "Array: ";
+			
+			// Convert the array into integers
+			for($LCV = 0; $LCV < count($array); $LCV++)
+				$array[$LCV] = intval($array[$LCV]);
+			
+			// Display the array to the user
+			for($LCV = 0; $LCV < count($array); $LCV++)
+			{
+				echo $array[$LCV];
+				
+				if($LCV != (count($array)-1))
+					echo ", ";
+			}
+		}
+		
+		// The form that allows the user to return to the main form to change some input
+		// NOTE: This form passes the already entered values back to the main form
+		echo "<form action='" . $_SERVER['PHP_SELF'] . "' method='POST'>";
+		echo "<input type='hidden' name='num' value='" . intval($_POST['num']) . "'>";
+		echo "<input type='hidden' name='array' value='" . $_POST['array'] . "'>";
+		echo "<input type='hidden' name='values' value='" . $_POST['values'] . "'>";
+		echo "<input type='hidden' name='upperBound' value='" . intval($_POST['upperBound']) . "'>";
+		echo "<input type='hidden' name='lowerBound' value='" . intval($_POST['lowerBound']) . "'>";
+		echo "<input type='submit' value='Return'>";
+		echo "</form>";
+		
+		// If the user wanted to generate a new array
+		if($_POST['values'] == 'random')
+		{
+			// This form allows the user to regenerate a new random array
+			echo "<form action='" . $_SERVER['PHP_SELF'] . "' method='POST'>";
+			echo "<input type='hidden' name='num' value='" . $_POST['num'] . "'>";
+			echo "<input type='hidden' name='array' value='" . $_POST['array'] . "'>";
+			echo "<input type='hidden' name='values' value='" . $_POST['values'] . "'>";
+			echo "<input type='hidden' name='upperBound' value='" . $_POST['upperBound'] . "'>";
+			echo "<input type='hidden' name='lowerBound' value='" . $_POST['lowerBound'] . "'>";
+			echo "<input type='hidden' name='run' value='true'>";
+			echo "<input type='submit' value='Regenerate Array'>";
+			echo "</form>";
+		}
+		
+		// This form will progress the user to the selection sort simulator page
+		echo "<form action='selectionSortSimulation.php' method='POST'>";
+		echo "<input type='hidden' name='array' value='" . serialize($array) . "'>";
+		echo "<input type='hidden' name='lineNum' value='0'>";
+		echo "<input type='hidden' name='currentIndex' value='-1'>";
+		echo "<input type='hidden' name='comparisonIndex' value='-2'>";
+		echo "<input type='submit' value='Run Simulation'>";
+		echo "</form>";
 	}
 ?>
 </td>

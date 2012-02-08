@@ -447,7 +447,7 @@
 						for($LCV = 0; $LCV < $_POST['num']; $LCV++)
 							$array[$LCV] = intval($_POST['lowerBound'])+$LCV;
 					}
-					else // The more likely of the 
+					else
 					{
 						// Run a loop to insert a unique value into each index
 						for($LCV = 0; $LCV <  intval($_POST['num']); $LCV++)
