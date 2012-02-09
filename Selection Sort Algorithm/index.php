@@ -339,8 +339,6 @@
 		echo "<form action='selectionSortSimulation.php' method='POST'>";
 		echo "<input type='hidden' name='array' value='" . serialize($array) . "'>";
 		echo "<input type='hidden' name='lineNum' value='0'>";
-		echo "<input type='hidden' name='currentIndex' value='-1'>";
-		echo "<input type='hidden' name='comparisonIndex' value='-2'>";
 		echo "<input type='submit' value='Run Simulation'>";
 		echo "</form>";
 	}
