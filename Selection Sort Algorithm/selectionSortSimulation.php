@@ -24,27 +24,122 @@
 		
 		// Read in the line number or initialize it
 		if(isset($_POST['lineNum']))
-			$lineNum = $_POST['lineNum'];
+			$lineNum = $newLineNum = $_POST['lineNum'];
 		else
-			$lineNum = 0;
+			$lineNum = $newLineNum = 0;
 		
 		// Read in the current index
 		if(isset($_POST['index']))
-			$index = $_POST['index'];
+			$index = $newIndex = $_POST['index'];
 		else
-			$index = 0;
+			$index = $newIndex = -1;
 		
 		// Read in the comparison index
 		if(isset($_POST['compIndex']))
-			$compIndex = $_POST['compIndex'];
+			$compIndex = $newCompIndex = $_POST['compIndex'];
 		else
-			$compIndex = 0;
+			$compIndex = $newCompIndex = -1;
 		
 		// Read in the current minimum index
 		if(isset($_POST['minimumIndex']))
-			$minimumIndex = $_POST['minimumIndex'];
+			$minimumIndex = $newMinimumIndex = $_POST['minimumIndex'];
 		else
-			$minimumIndex = 0;
+			$minimumIndex = $newMinimumIndex = -1;
+		
+		// perform the current line of the selection sort
+		switch($lineNum)
+		{
+			// Line number = 0
+			// void selectionSort(int array[], int size) {
+			case 0:
+				$newLineNum++;
+				$newIndex = 0;
+				break;
+				// Line number = 1
+				// for(int Index = 0; Index < size; Index++) {
+			case 1:
+				if($index < count($array))
+				{
+					$cond = true;
+					$newLineNum++;
+				}
+				else
+				{
+					$cond = false;
+					$newLineNum = -1; // The algorithm is complete
+				}
+				$newMinimumIndex = $index;
+				break;
+				// Line number = 2
+				// int Minimum = Index;
+			case 2:
+				$newLineNum++;
+				$newCompIndex = $index+1;
+				break;
+				// Line number = 3
+				// for(int Comparison = Index+1; Comparison < size; Comparison++) {
+			case 3:
+				if($compIndex < count($array))
+				{
+					$newLineNum++;
+					$cond = true;
+				}
+				else
+				{
+					$newLineNum = 6;
+					$cond = false;
+				}
+				break;
+				// Line number = 4
+				// if(array[Comparison] < array[Minimum]) {
+			case 4:
+				if($array[$compIndex] < $array[$minimumIndex])
+				{
+					$cond = true;
+					$newLineNum++;
+				}
+				else
+				{
+					$cond = false;
+					$newLineNum--;
+					$newCompIndex++;
+				}
+				break;
+				// Line number = 5
+				// Minimum = Comparison;
+			case 5:
+				$minimumIndex = $newMinimumIndex = $compIndex;
+				$newCompIndex++;
+				$newLineNum = 3;
+				break;
+				// Line number = 6
+				// if(Minimum != Index) {
+			case 6:
+				if($minimumIndex != $index)
+				{
+					$cond = true;
+					$newLineNum++;
+				}
+				else
+				{
+					$cond = false;
+					$newLineNum = 1;
+					$newIndex++;
+				}
+				break;
+				// Line number = 7
+				// Perform the swap
+				// int temp = array[Index];
+				// array[Index] = array[Minimum];
+				// array[Minimum] = temp;
+			case 7:
+				$temp = $array[$index];
+				$array[$index] = $array[$minimumIndex];
+				$array[$minimumIndex] = $temp;
+				$newLineNum = 1;
+				$newIndex++;
+				break;
+		}
 		
 		// Print the indexes
 		
@@ -95,9 +190,11 @@
 		
 		// Testing form
 		echo "<form action='" . $_SERVER['PHP_SELF'] . "' method='POST'>";
-		echo "<input type='hidden' name='array' value='" . $_POST['array'] . "'>";
-		if($lineNum !=7)
-			echo "<input type='hidden' name='lineNum' value='" . ($lineNum+1) . "'>";
+		echo "<input type='hidden' name='array' value='" . serialize($array) . "'>";
+		echo "<input type='hidden' name='lineNum' value='$newLineNum'>";
+		echo "<input type='hidden' name='index' value='$newIndex'>";
+		echo "<input type='hidden' name='compIndex' value='$newCompIndex'>";
+		echo "<input type='hidden' name='minimumIndex' value='$newMinimumIndex'>";
 		echo "<input type='submit'>";
 		echo "</form>";
 	}
