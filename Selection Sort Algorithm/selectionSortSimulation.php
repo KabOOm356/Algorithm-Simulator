@@ -161,7 +161,10 @@
 		// TODO Add index highlighting
 		for($LCV = 0; $LCV < count($array); $LCV++)
 		{
-			echo "<td width='40' bgcolor=white>" . $array[$LCV] . "</td>";
+			if($LCV < $index)
+				echo "<td width='40' bgcolor=gray>" . $array[$LCV] . "</td>";
+			else
+				echo "<td width='40' bgcolor=white>" . $array[$LCV] . "</td>";
 		}
 		
 		echo "</tr></table>";
