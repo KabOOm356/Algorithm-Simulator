@@ -3,8 +3,9 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Binary Search Algorithm Simulator</title>
+<script src="../res/javascript.js"></script>
 </head>
-<body bgcolor="gray">
+<body bgcolor="gray"  onkeypress="javascript: onKey(event);">
 	<table border='1' cellpadding='20' align='center'>
 		<tr>
 			<td align='center'>
@@ -346,7 +347,7 @@
 							echo "<p style='padding-left:15;'><code>-(First + 1) => -($firstNew + 1) => -$firstNew - 1 => $midNew</code></p>";
 							echo "<p>The returned value $midNew indicates that the value was not found in the array,<br/>and it also can be used to indicate exactly where this new value could be<br/>inserted into the array to maintain the array in sorted order.</p>";
 								
-							echo "<form action='" . $_SERVER['PHP_SELF'] . "' method='POST'>";
+							echo "<form name='form' action='" . $_SERVER['PHP_SELF'] . "' method='POST'>";
 							echo "<input type='hidden' name='search' value='" . $search . "'>";
 							echo "<input type='hidden' name='array' value='" . serialize($array) . "'>";
 							if(isset($_POST['insert']))
@@ -363,7 +364,7 @@
 							// If insert was checked continue to insertion
 							if(isset($_POST['insert']))
 							{
-								echo "<form action='insertionSimulation.php' method='POST'>";
+								echo "<form name='form' action='insertionSimulation.php' method='POST'>";
 								echo "<input type='hidden' name='array' value='" . serialize($array) . "'>";
 								echo "<input type='hidden' name='insert' value='" . $search . "'>";
 								echo "<input type='hidden' name='index' value='" . $index . "'>";
@@ -389,7 +390,7 @@
 								echo "<input type='submit' value='Return to Simulator Selection Menu'>";
 								echo "</form>";
 
-								echo "<form action='insertionSimulation.php' method='POST'>";
+								echo "<form name='form' action='insertionSimulation.php' method='POST'>";
 								echo "<input type='hidden' name='array' value='" . serialize($array) . "'>";
 								echo "<input type='hidden' name='insert' value='" . $search . "'>";
 								echo "<input type='hidden' name='index' value='" . $first . "'>";
@@ -421,7 +422,7 @@
 				else
 				{
 					// Continue to next step
-					echo "<form action='" . $_SERVER['PHP_SELF'] . "' method='POST'>";
+					echo "<form name='form' action='" . $_SERVER['PHP_SELF'] . "' method='POST'>";
 					echo "<input type='hidden' name='search' value='" . $search . "'>";
 					echo "<input type='hidden' name='array' value='" . serialize($array) . "'>";
 					if(isset($_POST['insert']))
@@ -438,7 +439,7 @@
 			{
 				// Some of the required variables were not set, alert the user and begin debugging
 				echo "<b><font color='red'>One or all of the required variables were not set properly.<br/><br/>You must return to the Simulator Selection Menu to get the error and restart</font><br/><br/>";
-				echo "<form action='index.php' method='POST'>";
+				echo "<form name='form' action='index.php' method='POST'>";
 
 				if(isset($_POST['search']))
 					echo "<input type='hidden' name='search' value='" . $_POST['search'] . "'>";

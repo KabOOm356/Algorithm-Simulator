@@ -3,8 +3,9 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Selection Sort Simulator</title>
+<script src="../res/javascript.js"></script>
 </head>
-<body bgcolor="gray">
+<body bgcolor="gray" onkeypress="javascript: onKey(event);">
 <table border='1' cellpadding='20' align='center'>
 <tr>
 <td align='center'>
@@ -186,10 +187,11 @@
 		
 		echo "</tr></table>";
 		
+		// Print the psuedocode for the algorithm with the current line hightlighted
 		printAlgo($lineNum);
 		
-		// Testing form
-		echo "<form action='" . $_SERVER['PHP_SELF'] . "' method='POST'>";
+		// Form to continue to the next step
+		echo "<form name='form' action='" . $_SERVER['PHP_SELF'] . "' method='POST'>";
 		echo "<input type='hidden' name='array' value='" . serialize($array) . "'>";
 		echo "<input type='hidden' name='lineNum' value='$newLineNum'>";
 		echo "<input type='hidden' name='index' value='$newIndex'>";
