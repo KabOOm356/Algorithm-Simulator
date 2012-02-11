@@ -126,6 +126,7 @@
 					$cond = false;
 					$newLineNum = 1;
 					$newIndex++;
+					$newMinimumIndex = -1;
 				}
 				break;
 				// Line number = 7
@@ -138,6 +139,7 @@
 				$array[$index] = $array[$minimumIndex];
 				$array[$minimumIndex] = $temp;
 				$newLineNum = 1;
+				$newMinimumIndex = -1;
 				$newIndex++;
 				break;
 		}
