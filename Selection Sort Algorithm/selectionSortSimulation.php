@@ -10,8 +10,6 @@
 <tr>
 <td align='center'>
 <?php
-	echo "<h1><font color='yellow'>This is still a work in progress!</font></h1>";
-	
 	if(isset($_POST['array']))
 	{
 		// Heading 1
