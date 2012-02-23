@@ -108,15 +108,19 @@
 	}
 	
 	if(!$start) // If there was an error or the user has not filled out the form yet show the form
-	{	
-		echo "<p><h1><font color='yellow'>This is still a work in progress!</font></h1></p>";
-		
-		echo "<p><h1>Introduction to Selection Sort Algorithm Simulator</h1></p>";
+	{		
+		echo "<h1>Introduction to Selection Sort Algorithm Simulator</h1>";
 		
 		echo '<p>This file was last updated: ' . date ('F d Y H:i:s.', getlastmod()) . "</p>";
 		
-		// TODO Add a description
-		echo "<p><i>Description...</i></p>";
+		// A description of the Selection Sort Algorithm
+		echo "<p>The Selection Sort Algorithm is a sorting algorithm that will sort an unsorted array.  The algorithm works by having looping through<br/>
+		the array at each index to find the smallest value in the array.  Once, it has progressed through the entire array and has found the<br/>
+		smallest value in the array it will swap the values in the current index and the minimum value.</p>";
+		
+		// Paragraph 2 of the description of the Selection Sort Algorithm
+		echo "<p>The Selection Sort Algorithm operates in O(n&sup2;).  This is because the algorithm must loop through the array twice.  First to get the<br/>
+		next unsorted index and then again to get the next smallest value in the array.</p>";
 		
 		// Start the main form
 		echo "<form action='" . $_SERVER['PHP_SELF'] . "' method='POST'>";
