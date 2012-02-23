@@ -249,6 +249,9 @@
 		
 		echo "<input type='Submit' name='run' value='Run Simulator'>  <input type='reset' value='Reset'>";
 		echo "</form>";
+		echo "<form action='../index.php' method='POST'>";
+		echo "<input type='submit' value='Return to Simulation Selection'>";
+		echo "</form>";
 	}
 	else // If the user has filled out the form and the input was properly entered
 	{
