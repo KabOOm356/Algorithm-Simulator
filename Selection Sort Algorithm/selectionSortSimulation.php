@@ -297,20 +297,33 @@
 		if($lineNum != -1)
 			printAlgo($lineNum);
 		
-		// Form to continue to the next step
 		if($lineNum != -1)
 		{
+			// Form to continue to the next step
 			echo "<form name='form' action='" . $_SERVER['PHP_SELF'] . "' method='POST'>";
 			echo "<input type='hidden' name='array' value='" . serialize($array) . "'>";
 			echo "<input type='hidden' name='lineNum' value='$newLineNum'>";
 			echo "<input type='hidden' name='index' value='$newIndex'>";
 			echo "<input type='hidden' name='compIndex' value='$newCompIndex'>";
 			echo "<input type='hidden' name='minimumIndex' value='$newMinimumIndex'>";
-			echo "<input type='submit'>";
+			echo "<input type=\"hidden\" name=\"hasPrevious\" value=\"true\">";
+			echo "<input type='submit' value=\"Next Step in Simulation\">";
 			echo "</form>";
+			
+			// Form to go to the previous step
+			if(isset($_POST['hasPrevious']))
+			{
+				echo "<form>";
+				echo "<input type=\"button\" value=\"Previous Step in Simulation\" onClick=\"javascript: previousPage();\">";
+				echo "</form>";
+			}
 		}
 		else
 		{
+			echo "<form>";
+			echo "<input type=\"button\" value=\"Previous Step in Simulation\" onClick=\"javascript: previousPage();\">";
+			echo "</form>";
+			
 			echo "<form name='form' action='index.php' method='POST'>";
 			echo "<input type='submit' value='Return to Simulator Selection Menu'>";
 			echo "</form>";

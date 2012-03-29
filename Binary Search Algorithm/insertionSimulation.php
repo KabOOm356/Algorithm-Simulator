@@ -236,8 +236,18 @@
 						$currentIndex = count($array)-1;
 					}
 					echo "<input type='hidden' name='currentIndex' value='" . $currentIndex . "'>";
+					echo "<input type=\"hidden\" name=\"hasPrevious\" value=\"true\">";
 					echo "<input type='hidden' name='insert' value='" . $insert . "'>";
 					echo "<input type='submit' value='Next step in Simulation'>";
+					echo "</form>";
+					
+					// Form to go to the previous step
+					if(isset($_POST['hasPrevious']))
+					{
+						echo "<form>";
+						echo "<input type=\"button\" value=\"Previous Step in Simulation\" onClick=\"javascript: previousPage();\">";
+						echo "</form>";
+					}
 				}
 				else
 				{
@@ -251,7 +261,13 @@
 					echo "<input type='hidden' name='last' value='-2'>";
 					echo "<input type='submit' value='Start a new Simulation'>";
 					echo "</form>";
-						
+					
+					// Form to go to previous step
+					echo "<form>";
+					echo "<input type=\"button\" value=\"Previous Step in Simulation\" onClick=\"javascript: previousPage();\">";
+					echo "</form>";
+					
+					// Form to go to the Binary Search Simulation menu
 					echo "<form action='index.php' action='POST'>";
 					echo "<input type='submit' value='Return to Simulator Selection Menu'>";
 					echo "</form>";
