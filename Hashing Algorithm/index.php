@@ -51,6 +51,7 @@ if(isset($_POST['submit']))
 	echo "</font></p>";
 }
 
+// If there were errors or the main form was not submitted
 if(!$start)
 {
 	echo "<h1>Introduction to the Hashing Algorithm Simulator</h1>";
@@ -60,6 +61,7 @@ if(!$start)
 	// TODO write a description
 	echo "<p><i>Write a description...</i></p>";
 	
+	// Main input form
 	echo "<form method=\"POST\" action=\"" . $_SERVER['PHP_SELF'] . "\">";
 	
 	echo "Indicate your initial Array Size:  ";
@@ -103,11 +105,53 @@ else
 {
 	echo "<h1>Input Summary</h1>";
 	
+	// Generate a a random array
+	for($LCV = 0; $LCV < $_POST['Size']; $LCV++)
+		$array[$LCV] = rand($_POST['range1'], $_POST['range2']);
+					
+	// Shuffle the array
+	shuffle($array);
+	
 	echo "<p>";
 	echo "Size: " . $_POST['Size'] . "<br/>";
 	echo "Lower Bound: " . $_POST['range1'] . "<br/>";
 	echo "Upper Bound: " . $_POST['range2'] . "<br/>";
+	echo "<br/>Array: ";
+	
+	// Display the array to the user
+	for($LCV = 0; $LCV < count($array); $LCV++)
+	{
+		echo $array[$LCV];
+		if($LCV != (count($array)-1))
+			echo ", ";
+	}
+	
 	echo "</p>";
+	
+	// Form to return to the previous screen
+	echo "<form method=\"POST\" action=\"" . $_SERVER['PHP_SELF'] . "\">";
+	echo "<input type=\"hidden\" name=\"Size\" value=\"" . $_POST['Size'] . "\">";
+	echo "<input type=\"hidden\" name=\"range1\" value=\"" . $_POST['range1'] . "\">";
+	echo "<input type=\"hidden\" name=\"range2\" value=\"" . $_POST['range2'] . "\">";
+	echo "<input type=\"submit\" value=\"Return\">";
+	echo "</form>";
+	
+	// Form to regenerate the array
+	echo "<form method=\"POST\" action=\"" . $_SERVER['PHP_SELF'] . "\">";
+	echo "<input type=\"hidden\" name=\"Size\" value=\"" . $_POST['Size'] . "\">";
+	echo "<input type=\"hidden\" name=\"range1\" value=\"" . $_POST['range1'] . "\">";
+	echo "<input type=\"hidden\" name=\"range2\" value=\"" . $_POST['range2'] . "\">";
+	echo "<input type=\"submit\" name=\"submit\" value=\"Regenerate Array\">";
+	echo "</form>";
+	
+	// Form to being the simulator
+	// TODO add the name of the simulator file here as action
+	echo "<form method=\"POST\" action=\"" . $_SERVER['PHP_SELF'] . "\">";
+	echo "<input type=\"hidden\" name=\"Size\" value=\"" . $_POST['Size'] . "\">";
+	echo "<input type=\"hidden\" name=\"range1\" value=\"" . $_POST['range1'] . "\">";
+	echo "<input type=\"hidden\" name=\"range2\" value=\"" . $_POST['range2'] . "\">";
+	echo "<input type=\"submit\" value=\"Run Simulator\">";
+	echo "</form>";
 }
 ?>
 </td>
