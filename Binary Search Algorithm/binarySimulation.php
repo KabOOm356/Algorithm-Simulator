@@ -358,12 +358,23 @@
 							echo "<input type='hidden' name='last' value='" . $lastNew . "'>";
 							echo "<input type='submit' value='Next Step in Simulation'>";
 							echo "</form>";
+							
+							// Form to go to the previous step
+							echo "<form>";
+							echo "<input type=\"button\" value=\"Previous Step in Simulation\" onClick=\"javascript: previousPage();\">";
+							echo "</form>";
 						}
 						else
 						{
 							// If insert was checked continue to insertion
 							if(isset($_POST['insert']))
 							{
+								// Form to go to the previous step
+								echo "<form>";
+								echo "<input type=\"button\" value=\"Previous Step in Simulation\" onClick=\"javascript: previousPage();\">";
+								echo "</form>";
+								
+								// Form to continue to the insertion simulation
 								echo "<form name='form' action='insertionSimulation.php' method='POST'>";
 								echo "<input type='hidden' name='array' value='" . serialize($array) . "'>";
 								echo "<input type='hidden' name='insert' value='" . $search . "'>";
@@ -385,11 +396,18 @@
 								echo "<input type='hidden' name='last' value='-2'>";
 								echo "<input type='submit' value='Start a new Simulation'>";
 								echo "</form>";
+								
+								// Form to go to the previous step
+								echo "<form>";
+								echo "<input type=\"button\" value=\"Previous Step in Simulation\" onClick=\"javascript: previousPage();\">";
+								echo "</form>";
 
+								// Form to return to the Binary Search Algorithm menu
 								echo "<form action='index.php' action='POST'>";
 								echo "<input type='submit' value='Return to Simulator Selection Menu'>";
 								echo "</form>";
 
+								// Form to go to the insertion simulation
 								echo "<form name='form' action='insertionSimulation.php' method='POST'>";
 								echo "<input type='hidden' name='array' value='" . serialize($array) . "'>";
 								echo "<input type='hidden' name='insert' value='" . $search . "'>";
@@ -413,7 +431,13 @@
 						echo "<input type='hidden' name='last' value='-2'>";
 						echo "<input type='submit' value='Start a new Simulation'>";
 						echo "</form>";
+						
+						// Form to go to the previous step
+						echo "<form>";
+						echo "<input type=\"button\" value=\"Previous Step in Simulation\" onClick=\"javascript: previousPage();\">";
+						echo "</form>";
 
+						// Form to return to the Binary Search Algorithm menu
 						echo "<form action='index.php' action='POST'>";
 						echo "<input type='submit' value='Return to Simulator Selection Menu'>";
 						echo "</form>";
@@ -431,8 +455,17 @@
 					echo "<input type='hidden' name='first' value='" . $firstNew . "'>";
 					echo "<input type='hidden' name='mid' value='" . $midNew . "'>";
 					echo "<input type='hidden' name='last' value='" . $lastNew . "'>";
+					echo "<input type=\"hidden\" name=\"hasPrevious\" value=\"true\">";
 					echo "<input type='submit' value='Next Step in Simulation'>";
 					echo "</form>";
+					
+					// Form to go to the previous step
+					if(isset($_POST['hasPrevious']))
+					{
+						echo "<form>";
+						echo "<input type=\"button\" value=\"Previous Step in Simulation\" onClick=\"javascript: previousPage();\">";
+						echo "</form>";
+					}
 				}
 			}
 			elseif(isset($_POST['search']) || isset($_POST['array']))
