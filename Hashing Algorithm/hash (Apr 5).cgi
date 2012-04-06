@@ -216,7 +216,7 @@ if (!$error)
 
 echo "</p>";
 
-	// Form to return to the previous screen
+	// Restart Simulation
 	echo "<form method=\"POST\" action=\"" . $_SERVER['PHP_SELF'] . "\">";
 	echo "<input type=\"hidden\" name=\"Size\" value=\"" . $_POST['Size'] . "\">";
 	echo "<input type=\"hidden\" name=\"range1\" value=\"" . $_POST['range1'] . "\">";
@@ -238,8 +238,7 @@ echo "</p>";
 	
 	if($counting > 0)
 	{
-	// Form to being the simulator
-	// TODO add the name of the simulator file here as action
+	// Previous Button
 	echo "<form method=\"POST\" action=\"" . $_SERVER['PHP_SELF'] . "\">";
 	echo "<input type=\"hidden\" name=\"Size\" value=\"" . $_POST['Size'] . "\">";
 	echo "<input type=\"hidden\" name=\"range1\" value=\"" . $_POST['range1'] . "\">";
@@ -255,8 +254,7 @@ echo "</p>";
 	
 	if(sizeof($rand) > $counter)
 	{
-	// Form to being the simulator
-	// TODO add the name of the simulator file here as action
+	//Next button
 	echo "<form method=\"POST\" action=\"" . $_SERVER['PHP_SELF'] . "\">";
 	echo "<input type=\"hidden\" name=\"Size\" value=\"" . $_POST['Size'] . "\">";
 	echo "<input type=\"hidden\" name=\"range1\" value=\"" . $_POST['range1'] . "\">";
