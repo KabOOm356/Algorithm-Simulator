@@ -82,6 +82,7 @@
             echo "</tr>\n";
             echo "</table>\n";
             echo "</form>\n";
+            echo "ONLY USE THE RANDOM NUMBER RANGE SELCTION AS OF NOW, I NEED TO FIX THE USER MADE ARRAY PART!!";
             
             //logic to create array
             if(isset($_POST['arraySize'])){
@@ -102,12 +103,14 @@
             }
             
             function makeArray(){
-                        if(isset($_POST['rangeLow'])&&isset($_POST['rangeHigh'])){
+                        $var_name = $_POST['arrayType'];
+                        
+                        if($var_name=="random"){
                                     for($i = 0; $i < $_POST['arraySize']; $i++)
                                        $array[$i] = rand($_POST['rangeLow'], $_POST['rangeHigh']);
                                
                                     shuffle($array);
-                        }elseif(isset($_POST['arrayIndexes'])){
+                        }elseif($var_name=="userVals"){
                             // Split the string array by spaces
                                     $array = explode(" ", $_POST['arrayIndexes']);
                                     
@@ -123,8 +126,8 @@
 		echo "<input type='hidden' name='array' value='" . serialize($array1) . "'>\n";
 		echo "<input type='hidden' name='lineNum' value='0'>\n";
                 echo "<input type='hidden' name='iValue' value='0'>\n";
-                echo "<input type='hidden' name='jValue' value='0'>\n";
-                echo "<input type='hidden' name='count' value='".count($array1)."'>\n";
+                echo "<input type='hidden' name='jValue' value='1'>\n";
+                echo "<input type='hidden' name='tmpVal' value='0'>\n";
 		echo "<input type='submit' value='Run Simulation'>\n";
 		echo "</form>";
             }
