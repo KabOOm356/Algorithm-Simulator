@@ -175,6 +175,8 @@ function bubble_sort($array_copy,$lineNum,$outerVal,$innerVal, $length){
         case 0:
             //make sure innerval is 0 in case you step inside for-loop
             $innerVal =0;
+            
+            written_section($array_copy, $lineNum, $outerVal, $innerVal, $length);
             if($outerVal < $length){
                 //enter for-loop
                 $lineNum =1;
@@ -188,7 +190,9 @@ function bubble_sort($array_copy,$lineNum,$outerVal,$innerVal, $length){
         Line number = 1
         for ($innerVal = 0; $innerVal < $length; $innerVal++)
         */
-        case 1:    
+        case 1:
+            
+            written_section($array_copy, $lineNum, $outerVal, $innerVal, $length);
             if($innerVal < $length){
                 //enter for-loop
                 $lineNum =2;
@@ -206,6 +210,8 @@ function bubble_sort($array_copy,$lineNum,$outerVal,$innerVal, $length){
         case 2:
             $compareValue1 = $array_copy[$outerVal]; 
             $compareValue2 = $array_copy[$innerVal];
+            
+            written_section($array_copy, $lineNum, $outerVal, $innerVal, $length);
             if($compareValue1<$compareValue2){
                 //enter if-statement
                 $lineNum =3;
@@ -214,7 +220,6 @@ function bubble_sort($array_copy,$lineNum,$outerVal,$innerVal, $length){
                 $innerVal = $innerVal + 1;
                 $lineNum = 1;
             }
-            
             next_step_button($array_copy,$lineNum,$outerVal,$innerVal, $length);
         break;
         /*
@@ -230,7 +235,9 @@ function bubble_sort($array_copy,$lineNum,$outerVal,$innerVal, $length){
             $array_copy[$innerVal] = $tmpVal;
             
             $innerVal = $innerVal + 1;
+            written_section($array_copy, $lineNum, $outerVal, $innerVal, $length);
             $lineNum = 1;
+            
             next_step_button($array_copy,$lineNum,$outerVal,$innerVal, $length);
             //increment inner for-loop
         break;
@@ -239,12 +246,50 @@ function bubble_sort($array_copy,$lineNum,$outerVal,$innerVal, $length){
         case for when algorithm is over
         */
         case 4:
+            written_section($array_copy, $lineNum, $outerVal, $innerVal, $length);
             print_r($array_copy);
             echo "<br /> ARRAY SHOULD BE SORTED!";
         break;
         
     }
         
+}
+function written_section($array_copy, $lineNum, $outerVal, $innerVal, $length){
+    $temp1 = $array_copy[$outerVal];
+    $temp2 = $array_copy[$innerVal];
+    if($lineNum==0){
+        echo "<p>We are at the top-most step of the algorithm. We compare our /$outerVal variable of {$outerVal} to our array length of {$length}.";        
+        if($outerVal<$length){
+            echo " Since our \$outerVal variable is less than our array length, we will step into our for-loop and iterate from the 0 index all the way to $outerVal index. </p><br />";    
+        }else{
+            echo "Because our \$outerVal variable is not less than the length of our array, we have compared every index to each other and our array is now sorted. We will skip over this for-loop. </p><br />";
+        }
+    }elseif($lineNum==1){
+        echo "<p>We are at the second step, or the second-for loop, of the algorithm. Now, our \$innerVal is $innerVal and we will compare it to our array length of {$length}.";        
+        if($innerValVal<$length){
+            echo " Since our \$innerVal variable is less than our array length, we will step into this second for-loop. </p><br />";    
+        }else{
+            echo "Because our \$innerVal variable is not less than the length of our array, we have compared every index from 0 to {$outerVal} with each other. We will skip over this for-loop. </p><br />";
+        }
+    }elseif($lineNum==2){
+        
+         echo "<p>This step of the sort will see if our array at the {$outerVal}(\$outerVal) index, is less than our array at the {$innerVal}(\$innerVal) index.";
+         echo "Our array at the $outerVal index is {$temp1}, and our array at the $innerVal index is {$temp2}. ";
+         if($temp1<$temp2){
+            echo "We will enter the if-statement because $temp1 is less than {$temp2}! </p><br />";
+         }else{
+            echo "We can pass over this if-statement because $temp1 is not less than {$temp2}, and increment our inner value by 1. </p> <br />";
+         }
+    }elseif($lineNum==3){
+        echo "<p> To swap the two indexes: \$outerval is {$outerVal} and \$innerVal is {$innerVal}, we need to use a temporary variable.";
+        echo "We will set this \$tmpVal variable to our array at \$outerVal index, which is {$temp1}.";
+        echo "Because we have that array index stored in a temporary variable, we can swap that index with our array value at index $innerVal. So now our array at index $outerVal equals {$temp2}.";
+        echo "Finally, we will set our array at the \$innerVal index of {$innerVal} to the value of our temporary variable, which is {$temp1}.";
+        echo "After those three commands we can now increment our \$innerVal variable by one and we are done with this section. </p> <br />";
+    }elseif($lineNum==4){
+        echo "<p>Hopefully you have come to understand the flow of the bubble sort algorithm. It merely starts from the leftmost index, and systematically";
+        echo "compares every index to each other. By comparing every index to each other and sorting them along the way, you end up with a sorted array!!</p>";
+    }
 }
 function next_step_button($array_copy, $lineNum, $outerVal, $innerVal, $length){
     /*variables needed
