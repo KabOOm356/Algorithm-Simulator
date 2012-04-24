@@ -1,18 +1,5 @@
 <?php
-/*
-echo "Made it here <br />\n";
-// Read in the array
-$array1 = unserialize($_POST['array']);
-echo "here is your array: <br />\n";
 
-reset($array1);
-foreach($array1 as $data){
-    echo "$data \n";
-}
-$line = $_POST['lineNum'];
-echo "here is your initial line number $line \n <br />";
-echo "-------------------------------------------------";
-*/
 set_up_values();
 
 function set_up_values(){
