@@ -109,12 +109,14 @@
     }
     function go_to_start($array1)
     {
+        $length = count($array1);
         echo "<form action='bubble_sort.php' method='POST'>\n";
 	echo "<input type='hidden' name='array' value='" . serialize($array1) . "'>\n";
 	echo "<input type='hidden' name='lineNum' value='0'>\n";
         echo "<input type='hidden' name='outerVal' value='0'>\n";
         echo "<input type='hidden' name='innerVal' value='0'>\n";
-        echo "<input type='hidden' name='tmpVal' value='0'>\n";
+        //echo "<input type='hidden' name='tmpVal' value='0'>\n";
+        echo "<input type='hidden' name='length' value='$length'>\n";
 	echo "<input type='submit' value='Run Simulation'>\n";
 	echo "</form>";
     }

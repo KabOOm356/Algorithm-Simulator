@@ -110,9 +110,9 @@ function show_algorithm($which_line){
             echo '<tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$array_copy[$innerVal] = $tmpVal;</td></tr>';
         }
         
-        echo '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}';
-        echo '&nbsp;&nbsp;&nbsp;&nbsp;}';
-        echo '}';
+        echo '<tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</td></tr>';
+        echo '<tr><td>&nbsp;&nbsp;&nbsp;&nbsp;}</td></tr>';
+        echo '<tr><td>}</td></tr>';
         
         echo '</table>';
         echo '</div>';
@@ -125,26 +125,30 @@ function set_up_values(){
     $lineNum = $_POST['lineNum'];
     $outerVal = $_POST['outerVal']; 
     $innerVal = $_POST['innerVal'];
-    $tmpVal = $_POST['tmpVal'];
+    //$tmpVal = $_POST['tmpVal'];
+    $length = $_POST['length'];
     //$length = count($array1);
     
     echo "DEBUG STUFF <br />";
     echo "line num: $lineNum <br />\n";
     echo "outerval: $outerVal <br />\n";
     echo "innerval: $innerVal <br />\n";
-    echo "tmpval: $tmpVal <br />\n";
-    
-    bubble_sort($array_copy,$lineNum,$outerVal,$innerVal,$tmpVal);
+    //echo "tmpval: $tmpVal <br />\n";
+    echo "length: $length <br />\n";
+    bubble_sort($array_copy,$lineNum,$outerVal,$innerVal,$length);
 
 }
 
-function bubble_sort($array1,$lineNum1,$outerVal1,$innerVal1, $tmpVal1){
+function bubble_sort($array_copy,$lineNum,$outerVal,$innerVal, $length){
+    /*
     $array_copy = $array1;
     $lineNum = $lineNum1;
     $outerVal = $outerVal1;
     $innerVal = $innerVal1;
     $tmpVal = $tmpVal1;
-    $length = count($array_copy);
+    */
+    //$length = count($array_copy);
+    
     /*
     [0]for ($outerVal = 0; $outerVal < $length; $outerVal++)
     {
@@ -169,6 +173,8 @@ function bubble_sort($array1,$lineNum1,$outerVal1,$innerVal1, $tmpVal1){
         */
         
         case 0:
+            //make sure innerval is 0 in case you step inside for-loop
+            $innerVal =0;
             if($outerVal < $length){
                 //enter for-loop
                 $lineNum =1;
@@ -176,7 +182,7 @@ function bubble_sort($array1,$lineNum1,$outerVal1,$innerVal1, $tmpVal1){
                 $lineNum = 4;
                 //algorithm is over
             }
-            next_step_button($array_copy,$lineNum,$outerVal,$innerVal,$tmpVal);
+            next_step_button($array_copy,$lineNum,$outerVal,$innerVal, $length);
         break;
         /*
         Line number = 1
@@ -191,7 +197,7 @@ function bubble_sort($array1,$lineNum1,$outerVal1,$innerVal1, $tmpVal1){
                 $outerVal = $outerVal + 1;
                 $lineNum = 0;
             }
-            next_step_button($array_copy,$lineNum,$outerVal,$innerVal,$tmpVal);
+            next_step_button($array_copy,$lineNum,$outerVal,$innerVal, $length);
         break;
         /*
         Line number = 2
@@ -209,7 +215,7 @@ function bubble_sort($array1,$lineNum1,$outerVal1,$innerVal1, $tmpVal1){
                 $lineNum = 1;
             }
             
-            next_step_button($array_copy,$lineNum,$outerVal,$innerVal,$tmpVal);
+            next_step_button($array_copy,$lineNum,$outerVal,$innerVal, $length);
         break;
         /*
         Line number = 3
@@ -225,7 +231,7 @@ function bubble_sort($array1,$lineNum1,$outerVal1,$innerVal1, $tmpVal1){
             
             $innerVal = $innerVal + 1;
             $lineNum = 1;
-            next_step_button($array_copy,$lineNum,$outerVal,$innerVal,$tmpVal);
+            next_step_button($array_copy,$lineNum,$outerVal,$innerVal, $length);
             //increment inner for-loop
         break;
         /*
@@ -240,7 +246,7 @@ function bubble_sort($array1,$lineNum1,$outerVal1,$innerVal1, $tmpVal1){
     }
         
 }
-function next_step_button($array_copy, $lineNum, $outerVal, $innerVal, $tmpVal){
+function next_step_button($array_copy, $lineNum, $outerVal, $innerVal, $length){
     /*variables needed
     array, linenum, outerval, innerval, tmpVal, length
     */
@@ -250,7 +256,8 @@ function next_step_button($array_copy, $lineNum, $outerVal, $innerVal, $tmpVal){
     echo "<input type='hidden' name='outerVal' value='$outerVal'>\n";
     echo "<input type='hidden' name='innerVal' value='$innerVal'>\n";
     echo "<input type='hidden' name='lineNum' value='$lineNum'>\n";
-    echo "<input type='hidden' name='tmpVal' value='$tmpVal'>\n";
+    //echo "<input type='hidden' name='tmpVal' value='$tmpVal'>\n";
+     echo "<input type='hidden' name='length' value='$length'>\n";
     echo "<input type=\"hidden\" name=\"hasPrevious\" value=\"true\">\n";
     echo "<input type='submit' value=\"Next Step in Simulation\">\n";
     echo "</form>\n";
