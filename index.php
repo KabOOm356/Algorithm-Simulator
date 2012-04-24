@@ -13,9 +13,11 @@
 				<p>
 					Pleases select which algorithm you would like to run:
 					<select name="algorithm">
-						<option value="BinSim">Binary Search Simulator</option>
-						<option value="HashSim">Hashing Simulator</option>
-						<option value="SelSort">Selection Sort Simulator</option>
+						<option value="Binary Search Algorithm">Binary Search Simulator</option>
+						<option value="bubble sort">Bubble Sort Simulator</option>
+						<option value="Hashing Algorithm">Hashing Simulator</option>
+						<option value="insertion sort">Insertion Sort Simulator</option>
+						<option value="Selection Sort Algorithm">Selection Sort Simulator</option>
 					</select>
 					<br/>
 					<input type="submit" name="Submit">
@@ -25,20 +27,9 @@
 	</tr>
 </table>
 <?php
-if(isset($_POST['Submit']))
+if(isset($_POST['Submit']) && !empty($_POST['algorithm']))
 {
-	switch($_POST['algorithm'])
-	{
-		case "BinSim":
-			header("Location: Binary Search Algorithm");
-		break;
-		case "HashSim":
-			header("Location: Hashing Algorithm");
-		break;
-		case "SelSort":
-			header("Location: Selection Sort Algorithm");
-		break;
-	}
+	header("Location: " . $_POST['algorithm']);
 }
 ?>
 </body>
