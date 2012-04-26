@@ -9,10 +9,6 @@
 <tr>
 <td align='center'>
 <?php
-
-// TODO Remove this when done debugging
-ini_set("display_errors", 1);
-
 $start=false;
 
 // Check the user input for errors

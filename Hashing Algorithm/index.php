@@ -8,11 +8,7 @@
 <table border='1' cellpadding='20' align='center'>
 <tr>
 <td align='center'>
-<h1><font color='yellow'>This is still a work in progress!</font></h1>
 <?php
-// TODO Remove this when done debugging
-ini_set("display_errors", 1);
-
 $start=false;
 
 if(isset($_POST['run']))
