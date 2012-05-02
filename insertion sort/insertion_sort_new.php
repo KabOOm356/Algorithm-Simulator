@@ -4,7 +4,7 @@
 <title>Selection Sort Simulator</title>
 <script src="../res/javascript.js" type="text/javascript"></script>
 </head>
-<body>
+<body onkeypress="javascript: onKey(event);">
 <?php
 
 set_up_values();
