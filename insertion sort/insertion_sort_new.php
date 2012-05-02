@@ -1,103 +1,110 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Selection Sort Simulator</title>
+<script src="../res/javascript.js" type="text/javascript"></script>
+</head>
+<body>
 <?php
 
 set_up_values();
 
 function set_up_values(){
-    $array1 = unserialize($_POST['array']);
-    $lineNum = $_POST['lineNum'];
-    $i = $_POST['iValue']; 
-    $j = $_POST['jValue'];
-    $tmp_val = $_POST['tmpVal'];
-    
-    /*
-    echo "DEBUG STUFF";
-    echo "<br />";
-    echo "line num: $lineNum <br />\n";
-    echo "i: $i <br />\n";
-    echo "j: $j <br />\n";
-    */
-    insertion_sort1($array1,$i,$j,$lineNum,$tmp_val);
+	$array1 = unserialize($_POST['array']);
+	$lineNum = $_POST['lineNum'];
+	$i = $_POST['iValue'];
+	$j = $_POST['jValue'];
+	$tmp_val = $_POST['tmpVal'];
+
+
+	echo "DEBUG STUFF";
+	echo "<br />";
+	echo "line num: $lineNum <br />\n";
+	echo "i: $i <br />\n";
+	echo "j: $j <br />\n";
+
+	insertion_sort1($array1,$i,$j,$lineNum,$tmp_val);
 }
 function show_algorithm1($which_line){
-            //insertion sort logic
-        
-           /*        
-           for($j=1; $j < count($arr); $j++) {
-	        $tmp = $arr[$j];
-	        $i = $j;
-	        while(($i >= 0) && ($arr[$i-1] > $tmp)) {
-	            $arr[$i] = $arr[$i-1];
-	            $i--;
-	        }
-	        $arr[$i] = $tmp;
-	    }
-           */
-    
-        echo '<div align="right">';
-        echo '<table border = "1">';
-        echo '<tr><th bgcolor="#808080">What Line of the Sort Are We In</th></tr>';
-        //the value of $which_line will show which line of the algorithm we are at by making the
-        //background of that line yellow
-        if($which_line==0)
-        {
-            echo '<tr><td bgcolor="#FFFF00">for($j=1; $j < count($array); $j++)</td></tr>';
-            echo '<tr><td>{</td></tr>';
-        }else
-        {
-            echo '<tr><td>for($j=1; $j < count($array); $j++)</td></tr>';
-            echo '<tr><td>{</td></tr>';
-        }
-        
-        if($which_line==1)
-        {
-            echo '<tr><td bgcolor="#FFFF00">&nbsp;&nbsp;&nbsp;&nbsp;$tmp = $array[$j];</td></tr>';
-        }else
-        {
-            echo '<tr><td>&nbsp;&nbsp;&nbsp;&nbsp;$tmp = $array[$j];</td></tr>';
-        }
-        
-        if($which_line==1)
-        {
-             echo '<tr><td bgcolor="#FFFF00">&nbsp;&nbsp;&nbsp;&nbsp;$i = $j;</td></tr>';
-        }else
-        {
-            echo '<tr><td>&nbsp;&nbsp;&nbsp;&nbsp;$i = $j;</td></tr>';
-        }
-        if($which_line==2)
-        {
-            echo '<tr><td bgcolor="#FFFF00">&nbsp;&nbsp;&nbsp;&nbsp;while(($i >= 0) && ($array[$i-1] > $tmp)) </td></tr>';
-            echo '<tr><td>&nbsp;&nbsp;&nbsp;&nbsp;{</td></tr>';
-        }else
-        {
-            echo '<tr><td>&nbsp;&nbsp;&nbsp;&nbsp;while(($i >= 0) && ($array[$i-1] > $tmp)) </td></tr>';
-            echo '<tr><td>&nbsp;&nbsp;&nbsp;&nbsp;{</td></tr>';
-        }
-        if($which_line==3)
-        {
-            echo '<tr><td bgcolor="#FFFF00">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$array[$i] = $array[$i-1];</td></tr>';
-        }else
-        {
-            echo '<tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$array[$i] = $array[$i-1];</td></tr>';
-        }
-        if($which_line==3)
-        {
-            echo '<tr><td bgcolor="#FFFF00">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$i--;</td></tr>';
-        }else
-        {
-            echo '<tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$i--;</td></tr>';
-        }
-        if($which_line==4)
-        {
-            echo '<tr><td>&nbsp;&nbsp;&nbsp;&nbsp;}</td></tr>';
-            echo '<tr><td bgcolor="#FFFF00">&nbsp;&nbsp;&nbsp;&nbsp;$array[$i] = $tmp;</td></tr>';
-            echo '<tr><td>}</td></tr>';
-        }else
-        {
-            echo '<tr><td>&nbsp;&nbsp;&nbsp;&nbsp;}</td></tr>';
-            echo '<tr><td>&nbsp;&nbsp;&nbsp;&nbsp;$array[$i] = $tmp;</td></tr>';
-            echo '<tr><td>}</td></tr>';
-        }
-        echo '</table>';
+	//insertion sort logic
+
+	/*
+	 for($j=1; $j < count($arr); $j++) {
+	$tmp = $arr[$j];
+	$i = $j;
+	while(($i >= 0) && ($arr[$i-1] > $tmp)) {
+	$arr[$i] = $arr[$i-1];
+	$i--;
+	}
+	$arr[$i] = $tmp;
+	}
+	*/
+
+	echo '<div align="center">';
+	echo '<table border = "1">';
+	echo '<tr><th bgcolor="#808080">What Line of the Sort Are We In</th></tr>';
+	//the value of $which_line will show which line of the algorithm we are at by making the
+	//background of that line yellow
+	if($which_line==0)
+	{
+		echo '<tr><td bgcolor="#FFFF00">for($j=1; $j < count($array); $j++)</td></tr>';
+		echo '<tr><td>{</td></tr>';
+	}else
+	{
+		echo '<tr><td>for($j=1; $j < count($array); $j++)</td></tr>';
+		echo '<tr><td>{</td></tr>';
+	}
+
+	if($which_line==1)
+	{
+		echo '<tr><td bgcolor="#FFFF00">&nbsp;&nbsp;&nbsp;&nbsp;$tmp = $array[$j];</td></tr>';
+	}else
+	{
+		echo '<tr><td>&nbsp;&nbsp;&nbsp;&nbsp;$tmp = $array[$j];</td></tr>';
+	}
+
+	if($which_line==1)
+	{
+		echo '<tr><td bgcolor="#FFFF00">&nbsp;&nbsp;&nbsp;&nbsp;$i = $j;</td></tr>';
+	}else
+	{
+		echo '<tr><td>&nbsp;&nbsp;&nbsp;&nbsp;$i = $j;</td></tr>';
+	}
+	if($which_line==2)
+	{
+		echo '<tr><td bgcolor="#FFFF00">&nbsp;&nbsp;&nbsp;&nbsp;while(($i >= 0) && ($array[$i-1] > $tmp)) </td></tr>';
+		echo '<tr><td>&nbsp;&nbsp;&nbsp;&nbsp;{</td></tr>';
+	}else
+	{
+		echo '<tr><td>&nbsp;&nbsp;&nbsp;&nbsp;while(($i >= 0) && ($array[$i-1] > $tmp)) </td></tr>';
+		echo '<tr><td>&nbsp;&nbsp;&nbsp;&nbsp;{</td></tr>';
+	}
+	if($which_line==3)
+	{
+		echo '<tr><td bgcolor="#FFFF00">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$array[$i] = $array[$i-1];</td></tr>';
+	}else
+	{
+		echo '<tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$array[$i] = $array[$i-1];</td></tr>';
+	}
+	if($which_line==3)
+	{
+		echo '<tr><td bgcolor="#FFFF00">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$i--;</td></tr>';
+	}else
+	{
+		echo '<tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$i--;</td></tr>';
+	}
+	if($which_line==4)
+	{
+		echo '<tr><td>&nbsp;&nbsp;&nbsp;&nbsp;}</td></tr>';
+		echo '<tr><td bgcolor="#FFFF00">&nbsp;&nbsp;&nbsp;&nbsp;$array[$i] = $tmp;</td></tr>';
+		echo '<tr><td>}</td></tr>';
+	}else
+	{
+		echo '<tr><td>&nbsp;&nbsp;&nbsp;&nbsp;}</td></tr>';
+		echo '<tr><td>&nbsp;&nbsp;&nbsp;&nbsp;$array[$i] = $tmp;</td></tr>';
+		echo '<tr><td>}</td></tr>';
+	}
+	echo '</table>';
         echo '</div>';
         
         
@@ -121,6 +128,8 @@ function sort_prac($array1){
 	 
         echo "<br />";
         print_r($arr);
+        
+        
     }
 function written_section1($array1,$i,$j,$lineNum,$tmp_val){
     if($lineNum==0){
@@ -250,6 +259,7 @@ function insertion_sort1($array_copy, $i1, $j1, $linenum1, $tmp_val1){
             }
 
             next_step_button($array1,$i, $j,$lineNum,$tmp_val);
+            backButton();
         break;
         /*
         Line number = 1
@@ -266,6 +276,7 @@ function insertion_sort1($array_copy, $i1, $j1, $linenum1, $tmp_val1){
             $lineNum = 2;
 
             next_step_button($array1,$i, $j,$lineNum,$tmp_val);
+            backButton();
             //step into line 2
         break;
         /*
@@ -275,6 +286,11 @@ function insertion_sort1($array_copy, $i1, $j1, $linenum1, $tmp_val1){
         case 2:
             
             $tmp_val2 = $array1[$i-1];
+            
+            show_algorithm1(2);
+            show_array($array1);
+            written_section1($array1,$i,$j,$lineNum,$tmp_val);
+            
             if($i>=0&&$tmp_val2>$tmp_val){
                 //step into line 3
                 $lineNum = 3;
@@ -282,10 +298,10 @@ function insertion_sort1($array_copy, $i1, $j1, $linenum1, $tmp_val1){
                 //step into line 4
                 $lineNum = 4;
             }
-            show_algorithm1(2);
-            show_array($array1);
-            written_section1($array1,$i,$j,$lineNum,$tmp_val);
+            
+            
             next_step_button($array1,$i, $j,$lineNum,$tmp_val);
+            backButton();
         break;
         /*
         Line number = 3
@@ -297,14 +313,17 @@ function insertion_sort1($array_copy, $i1, $j1, $linenum1, $tmp_val1){
             
             $array1[$i] = $array1[$i-1];
             $i = $i -1;
+
+            show_algorithm1(3);
+            show_array($array1);
+            written_section1($array1,$i,$j,$lineNum,$tmp_val);
             
             //step into line 2 again
             $lineNum = 2;
             
-            show_algorithm1(3);
-            show_array($array1);
-            written_section1($array1,$i,$j,$lineNum,$tmp_val);
+
             next_step_button($array1,$i, $j,$lineNum,$tmp_val);
+            backButton();
         break;
         /*
         Line number = 4
@@ -312,7 +331,11 @@ function insertion_sort1($array_copy, $i1, $j1, $linenum1, $tmp_val1){
         }
         */
         case 4:
-            
+        	show_algorithm1(4);
+        	show_array($array1);
+        	written_section1($array1,$i,$j,$lineNum,$tmp_val);
+        	
+        	
             $array1[$i] = $tmp_val;
             
             //the iteration part of the for-loop
@@ -321,10 +344,9 @@ function insertion_sort1($array_copy, $i1, $j1, $linenum1, $tmp_val1){
             //step into line 0
             $lineNum = 0;
             
-            show_algorithm1(4);
-            show_array($array1);
-            written_section1($array1,$i,$j,$lineNum,$tmp_val);
+ 
             next_step_button($array1,$i, $j,$lineNum,$tmp_val);
+            backButton();
         break;
         /*
          special case for when algorithm is over
@@ -339,8 +361,177 @@ function insertion_sort1($array_copy, $i1, $j1, $linenum1, $tmp_val1){
 
     
 }
-    
-    
+
+function cooler_array($array, $index){
+	
+	// Print the indexes
+	
+	echo "<table border='0' cellpadding='0' style='font-size:12pt;'>";
+	echo "<tr align='center' valign='bottom'>";
+	
+	// Print the indexes numbers
+	for($LCV = 0; $LCV < count($array); $LCV++)
+		echo "<td width='52'>$LCV</td>";
+			
+		echo "</tr></table>";
+	
+		// Print the array
+	
+		echo "<table border='1' cellpadding='5' style='font-size:18pt;'>";
+		echo "<tr align='center'>";
+	
+		for($LCV = 0; $LCV < count($array); $LCV++)
+		{
+		if($LCV < $index)
+			echo "<td width='40' bgcolor=gray>" . $array[$LCV] . "</td>";
+			else
+			echo "<td width='40' bgcolor=white>" . $array[$LCV] . "</td>";
+		}
+	
+		echo "</tr></table>";
+	
+		// Print the variable arrows
+	
+		echo "<table border='0' cellpadding='0' style='font-size:12pt;'>";
+		echo "<tr align='center' valign='top'>";
+	
+		for($LCV = 0; $LCV < count($array); $LCV++)
+		{
+		echo "<td width='52'>";
+		if($LCV == $index)
+		echo "&uarr;<br/>Index<br/>";
+		if($LCV == $compIndex)
+				echo "&uarr;<br/>Comparison<br/>";
+				if($LCV == $minimumIndex)
+						echo "&uarr;<br/>Minimum<br/>";
+	
+						echo "&nbsp;<br/>";
+						echo "</td>";
+		}
+	
+		echo "</tr></table>";
+	
+	
+}
+
+function cool_array(){
+	
+	echo "<table border='0' cellpadding='0' style='font-size:12pt;'>";
+	echo "<tr align='center' valign='bottom'>";
+	
+	// Print the indexes numbers
+	for($LCV = 0; $LCV < count($array); $LCV++)
+		echo "<td width='52'>$LCV</td>";
+	
+	echo "</tr></table>";
+	
+	echo "<table border='1' cellpadding='5' style='font-size:18pt;'>";
+	echo "<tr align='center'>";
+	
+	
+	
+	
+	
+	// Check if the line number != -1
+	// The line number equals -1 when index where to insert the value to search for has been found
+	if($lineNum != -1)
+	{
+		// Display array
+		for($LCV = 0; $LCV < count($array); $LCV++)
+			{
+			if($done && $LCV == $mid && $lineNum != 8)
+				echo "<td width='40' bgcolor=yellow>" . $array[$LCV] . "</td>";
+				elseif($LCV >= $firstNew && $LCV <= $lastNew)
+						echo "<td width='40' bgcolor=white>" . $array[$LCV] . "</td>";
+						else
+						echo "<td width='40' bgcolor=gray>" . $array[$LCV] . "</td>";
+			}
+	
+		echo "</tr></table>";
+	
+		echo "<table border='0' cellpadding='0' style='font-size:12pt;'>";
+		echo "<tr align='center' valign='top'>";
+	
+		// Display variable arrows
+	
+		if($done && $lineNum != 8)
+		{
+		// Output that the value has been found and output an arrow pointing to the index where it was found
+		for($LCV = -1; $LCV < count($array)+1; $LCV++)
+		{
+		echo "<td width='52'>";
+		if($LCV == $mid)
+		echo "&uarr;<br/>Found the Value!<br/>";
+		echo "&nbsp;<br/>";
+		echo "</td>";
+		}
+	}
+	else
+	{
+	// Display arrows pointing to the indexes of variables first, mid, and last
+	for($LCV = -1; $LCV < count($array)+1; $LCV++)
+	{
+	echo "<td width='52'>";
+	if($LCV == $firstNew)
+	echo "&uarr;<br/>First<br/>";
+	if($LCV == $lastNew)
+	echo "&uarr;<br/>Last<br/>";
+	if($midNew != -1)
+	{
+	if($LCV == $midNew)
+	echo "&uarr;<br/>Mid<br/>";
+	}
+	
+	echo "&nbsp;<br/>";
+	echo "</td>";
+	}
+	}
+	}
+	else // Highlight the location of where the value to search should be inserted
+		{
+	// Display the highlighted index
+	for($LCV = 0; $LCV < count($array); $LCV++)
+	{
+	if($LCV == (-($mid) - 1))
+			echo "<td width='40' bgcolor=yellow>" . $array[$LCV] . "</td>";
+			else
+			echo "<td width='40' bgcolor=gray>" . $array[$LCV] . "</td>";
+	}
+	
+	echo "</tr></table>";
+	
+	echo "<table border='0' cellpadding='0' style='font-size:12pt;'>";
+	echo "<tr align='center' valign='top'>";
+	
+	// Display the arrow to where the search for value should be inserted
+	for($LCV = 0; $LCV < count($array); $LCV++)
+	{
+	echo "<td width='52'>";
+	if($LCV == (-($mid) - 1))
+	echo "&uarr;<br/>Insert<br/>Here<br/>";
+	
+	echo "&nbsp;<br/></td>";
+	}
+	}
+	
+	echo "</tr></table>";
+	
+	
+	
+}
     
 
-?>		
+function backButton(){
+	
+	echo "<form>";
+	echo "<input type=\"button\" value =\"Previous Step in Simulation\" onClick=\"javascript: previousPage();\">";
+	echo "</form>";
+	
+}
+
+    
+
+?>	
+
+</body>
+</html>
