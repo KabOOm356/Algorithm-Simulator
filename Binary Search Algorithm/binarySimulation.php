@@ -35,7 +35,6 @@
 				$search = intval($_POST['search']);
 				
 				// Read in the array
-				// TODO This is probably not necessary
 				$in = unserialize($_POST['array']);
 				$array = "";
 				
@@ -161,7 +160,6 @@
 				if($lineNum == -1 && (-($mid) - 1) == count($array))
 					$array[] = "";
 
-				// TODO Update these to look better
 				// Display the graphics to the user
 				
 				echo "<table border='0' cellpadding='0' style='font-size:12pt;'>";
