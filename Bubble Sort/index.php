@@ -237,6 +237,7 @@ else // The user has submitted the form and all the data needed contained no err
 	// This form will progress the user to the bubble sort simulator page
 	echo "<form action='bubble_sort.php' method='POST' target='_top'>\n";
 	echo "<input type='hidden' name='array' value='" . serialize($array) . "'>\n";
+	echo "<input type='hidden' name='array1' value='" . serialize($array) . "'>\n";
 	echo "<input type='hidden' name='lineNum' value='0'>\n";
 	echo "<input type='hidden' name='outerVal' value='0'>\n";
 	echo "<input type='hidden' name='innerVal' value='0'>\n";

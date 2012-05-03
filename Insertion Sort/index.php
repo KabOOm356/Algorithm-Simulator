@@ -235,6 +235,7 @@ else // The user has submitted the form and all the data needed contained no err
 	// This form will progress the user to the selection sort simulator page
 	echo "<form action='insertionSort.php' method='POST' target='_top'>";
 	echo "<input type='hidden' name='array' value='" . serialize($array) . "'>";
+	echo "<input type='hidden' name='arrayCopy' value='" . serialize($array) . "'>";
 	echo "<input type='hidden' name='lineNum' value='0'>";
 	echo "<input type=\"hidden\" name=\"iValue\" value=\"0\" />";
 	echo "<input type=\"hidden\" name=\"jValue\" value=\"0\">";
