@@ -2,10 +2,9 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insertion Sort Algorithm Simulator</title>
+<title>Bubble Sort Algorithm Simulator</title>
 </head>
-<body bgcolor="gray">
-<table border='1' cellpadding='20' align='center'>
+<table border='0' cellpadding='0' align='center'>
 <tr>
 <td align='center'>
 <?php
@@ -102,12 +101,7 @@ if(isset($_POST['run']))
 // If there were errors or the user has not seen the entry page, display the entry form
 if(!$start)
 {
-	echo "<h1>Introduction to Insertion Sort Algorithm Simulator</h1>";
-
 	echo '<p>This file was last updated: ' . date ('F d Y H:i:s.', getlastmod()) . "</p>";
-
-	// TODO write a description
-	echo "<p><i>Write a description...</i></p>";
 
 	// The main form
 	echo "<form action='" . $_SERVER['PHP_SELF'] . "' method='POST'>";
@@ -155,9 +149,6 @@ if(!$start)
 	echo "<input type='text' name='array' value='$array'><br/><br/>";
 	echo "<input type='Submit' name='run' value='Run Simulator'>  <input type='reset' value='Reset'>";
 	echo "</form>";
-	echo "<form action='../index.php' method='POST'>";
-	echo "<input type='submit' value='Return to Simulation Selection'>";
-	echo "</form>";
 }
 else // The user has submitted the form and all the data needed contained no errors.  Show a confirmation screen before continuing to the simulation
 {
@@ -165,7 +156,7 @@ else // The user has submitted the form and all the data needed contained no err
 	echo "<h1>Input Summary</h1>";
 
 	// Display the specified size of the array
-	echo "Size of array: " . $_POST['num'] . "<br/><br/>";
+	echo "Size of array: " . $_POST['num'] . "<br/>";
 
 	// If the user specified to generate a random array
 	if($_POST['values'] == 'random')
@@ -240,17 +231,18 @@ else // The user has submitted the form and all the data needed contained no err
 		echo "<input type='submit' value='Regenerate Array'>";
 		echo "</form>";
 	}
+	
+	$length = count($array)-1;
 
-	// This form will progress the user to the selection sort simulator page
-	// TODO point this to the final file name
-	echo "<form action='insertion_sort_new.php' method='POST'>";
-	echo "<input type='hidden' name='array' value='" . serialize($array) . "'>";
-	echo "<input type='hidden' name='lineNum' value='0'>";
-	echo "<input type=\"hidden\" name=\"iValue\" value=\"0\" />";
-	echo "<input type=\"hidden\" name=\"jValue\" value=\"0\">";
-	echo "<input type=\"hidden\" name=\"tmpVal\" value=\"0\">";
-	echo "<input type='submit' value='Run Simulation'>";
-	echo "</form>";
+	// This form will progress the user to the bubble sort simulator page
+	echo "<form action='bubble_sort.php' method='POST' target='_top'>\n";
+	echo "<input type='hidden' name='array' value='" . serialize($array) . "'>\n";
+	echo "<input type='hidden' name='lineNum' value='0'>\n";
+	echo "<input type='hidden' name='outerVal' value='0'>\n";
+	echo "<input type='hidden' name='innerVal' value='0'>\n";
+	echo "<input type='hidden' name='length' value='$length'>\n";
+	echo "<input type='submit' value='Run Simulation'>\n";
+	echo "</form>\n";
 }
 ?>
 </td>

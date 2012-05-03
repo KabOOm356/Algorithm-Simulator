@@ -3,10 +3,11 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Selection Sort Simulator</title>
+<link rel="stylesheet" type="text/css" href="../css/SimCss.css" />
 <script src="../res/javascript.js" type="text/javascript"></script>
 </head>
 <body bgcolor="gray" onkeypress="javascript: onKey(event);">
-<table border='1' cellpadding='20' align='center'>
+<table border='1' cellpadding='20' align='center' class="alpha60">
 <tr>
 <td align='center'>
 <?php
@@ -149,21 +150,21 @@
 		
 		// Print the indexes numbers
 		for($LCV = 0; $LCV < count($array); $LCV++)
-			echo "<td width='52'>$LCV</td>";
+			echo "<td width='57'>$LCV</td>";
 			
 		echo "</tr></table>";
 		
 		// Print the array
 		
-		echo "<table border='1' cellpadding='5' style='font-size:18pt;'>";
+		echo "<table border='0' cellpadding='5' style='font-size:18pt;'>";
 		echo "<tr align='center'>";
 		
 		for($LCV = 0; $LCV < count($array); $LCV++)
 		{
 			if($LCV < $index)
-				echo "<td width='40' bgcolor=gray>" . $array[$LCV] . "</td>";
+				echo "<td width='40' id='tableTD3'>" . $array[$LCV] . "</td>";
 			else
-				echo "<td width='40' bgcolor=white>" . $array[$LCV] . "</td>";
+				echo "<td width='40' id='tableTD2'>" . $array[$LCV] . "</td>";
 		}
 		
 		echo "</tr></table>";
@@ -175,7 +176,7 @@
 		
 		for($LCV = 0; $LCV < count($array); $LCV++)
 		{
-			echo "<td width='52'>";
+			echo "<td width='56'>";
 			if($LCV == $index)
 				echo "&uarr;<br/>Index<br/>";
 			if($LCV == $compIndex)
@@ -324,7 +325,7 @@
 			echo "<input type=\"button\" value=\"Previous Step in Simulation\" onClick=\"javascript: previousPage();\">";
 			echo "</form>";
 			
-			echo "<form name='form' action='index.php' method='POST'>";
+			echo "<form name='form' action='../index.php' method='POST'>";
 			echo "<input type='submit' value='Return to Simulator Selection Menu'>";
 			echo "</form>";
 		}

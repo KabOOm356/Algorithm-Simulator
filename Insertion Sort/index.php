@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Selection Sort Algorithm Simulator</title>
+<title>Insertion Sort Algorithm Simulator</title>
 </head>
 <table border='0' cellpadding='0' align='center'>
 <tr>
@@ -101,9 +101,7 @@ if(isset($_POST['run']))
 // If there were errors or the user has not seen the entry page, display the entry form
 if(!$start)
 {
-
 	echo '<p>This file was last updated: ' . date ('F d Y H:i:s.', getlastmod()) . "</p>";
-
 
 	// The main form
 	echo "<form action='" . $_SERVER['PHP_SELF'] . "' method='POST'>";
@@ -235,9 +233,13 @@ else // The user has submitted the form and all the data needed contained no err
 	}
 
 	// This form will progress the user to the selection sort simulator page
-	echo "<form action='selectionSortSimulation.php' method='POST' target='_top'>";
+	// TODO point this to the final file name
+	echo "<form action='insertion_sort_new.php' method='POST' target='_top'>";
 	echo "<input type='hidden' name='array' value='" . serialize($array) . "'>";
 	echo "<input type='hidden' name='lineNum' value='0'>";
+	echo "<input type=\"hidden\" name=\"iValue\" value=\"0\" />";
+	echo "<input type=\"hidden\" name=\"jValue\" value=\"0\">";
+	echo "<input type=\"hidden\" name=\"tmpVal\" value=\"0\">";
 	echo "<input type='submit' value='Run Simulation'>";
 	echo "</form>";
 }

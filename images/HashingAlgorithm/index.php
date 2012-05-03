@@ -2,18 +2,18 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Bubble Sort Algorithm Simulator</title>
+<title>Hashing Algorithm Simulator</title>
 </head>
 <body bgcolor="gray">
 <table border='1' cellpadding='20' align='center'>
 <tr>
 <td align='center'>
 <?php
-$start = false;
+$start=false;
 
 if(isset($_POST['run']))
 {
-	$start = true;
+	$start=true;
 
 	// Check the user input for errors
 	echo "<p><font color=red>";
@@ -46,9 +46,26 @@ if(isset($_POST['run']))
 			echo "Random upper bound is not an integer!<br/>";
 			$start = false;
 		}
+
+		if(is_numeric($_POST['upperBound']) && is_numeric($_POST['lowerBound']))
+		{
+			// Calculate the difference between the two bounds
+			$diff = abs($_POST['upperBound'] - $_POST['lowerBound']);
+
+			if(is_numeric($_POST['num']))
+			{
+				// Check if it is possible to generate enough unique values for the array
+				if($diff < $_POST['num'])
+				{
+					echo "The difference between the upper bound and lower bound is $diff and is too small to generate a unique array with {$_POST['num']} values<br/>";
+					$start = false;
+				}
+			}
+		}
 	}
 	elseif($_POST['values'] == 'specified') // The user wants to use an array they enter
 	{
+	
 		// Check if the user has specified an array
 		if(empty($_POST['array']))
 		{
@@ -72,13 +89,37 @@ if(isset($_POST['run']))
 				}
 				else
 				{
-					for($LCV = 0; $LCV < count($array); $LCV++)
+					// Create an array that has only unique values in it from the array
+					// Essentially removes the duplicates from the array
+					$array_unique = array_unique($array);
+
+					// Check if the unique array is still the same size as the user specified
+					// Checks for duplicates
+					if(count($array_unique) != $_POST['num'])
 					{
-						// Check if each value provided is a number
-						if(!is_numeric($array[$LCV]))
+						echo "There are duplicate values in the provided array!<br/>";
+						$start = false;
+
+						// Get the number of times a value occurs in the array
+						$occurances = array_count_values($array);
+
+						for($LCV = 0; $LCV < count($array); $LCV++)
 						{
-							echo "The value at index " . ($LCV+1) . " of the provided array is not a number!<br/>";
-							$start = false;
+							// Check if the number of times a value occurs is more than once
+							if($occurances[$array[$LCV]] > 1)
+								echo "Position " . ($LCV+1) . " contains the duplicate number: {$array[$LCV]}<br/>";
+						}
+					}
+					else
+					{
+						for($LCV = 0; $LCV < count($array_unique); $LCV++)
+						{
+							// Check if each value provided is a number
+							if(!is_numeric($array_unique[$LCV]))
+							{
+								echo "The value at index " . ($LCV+1) . " of the provided array is not a number!<br/>";
+								$start = false;
+							}
 						}
 					}
 				}
@@ -102,11 +143,11 @@ if(isset($_POST['run']))
 // If there were errors or the user has not seen the entry page, display the entry form
 if(!$start)
 {
-	echo "<h1>Introduction to Bubble Sort Algorithm Simulator</h1>";
+	echo "<h1>Introduction to the Hashing Algorithm Simulator</h1>";
 
 	echo '<p>This file was last updated: ' . date ('F d Y H:i:s.', getlastmod()) . "</p>";
 
-	//TODO A description of the Bubble Sort Algorithm
+	// TODO write a description
 	echo "<p><i>Write a description...</i></p>";
 
 	// The main form
@@ -114,7 +155,7 @@ if(!$start)
 	echo "Specify number of initial values in array: ";
 
 	$num = (!empty($_POST['num'])) ? $_POST['num'] : "";
-
+	
 	switch($num)
 	{
 		case 7:
@@ -138,20 +179,20 @@ if(!$start)
 	$lowerBound = (isset($_POST['lowerBound'])) ? $_POST['lowerBound'] : "";
 	$upperBound = (isset($_POST['upperBound'])) ? $_POST['upperBound'] : "";
 	$array = (isset($_POST['array'])) ? $_POST['array'] : "";
-
+	
 	if($values == "random")
 		echo "<input type='radio' name='values' value='random' Checked> Random numbers in this Range: ";
 	else
 		echo "<input type='radio' name='values' value='random'> Random numbers in this Range: ";
-
+	
 	echo "<input type='text' name='lowerBound' value='$lowerBound'> to ";
 	echo "<input type='text' name='upperBound' value='$upperBound'> , or<br/><br/>";
-
+	
 	if($values == "specified")
 		echo "<input type='radio' name='values' value='specified' Checked> Specific numeric values:";
 	else
 		echo "<input type='radio' name='values' value='specified'> Specific numeric values:";
-
+	
 	echo "<input type='text' name='array' value='$array'><br/><br/>";
 	echo "<input type='Submit' name='run' value='Run Simulator'>  <input type='reset' value='Reset'>";
 	echo "</form>";
@@ -179,12 +220,48 @@ else // The user has submitted the form and all the data needed contained no err
 		// Display the upper bound of the random values in the array
 		echo "Upper Bound: " . intval($_POST['upperBound']) . "<br/>";
 
-		// Generate a a random array
-		for($LCV = 0; $LCV < $_POST['num']; $LCV++)
-			$array[$LCV] = rand($_POST['lowerBound'], $_POST['upperBound']);
+		// Get the difference between the two bounds
+		$diff = abs($_POST['upperBound'] - $_POST['lowerBound']);
 
-		// Shuffle the array
-		shuffle($array);
+		// Create an array
+		$occurances = array();
+
+		// Initialize the array to use with values that are out side of the bounds, in this case (user supplied lower bound - 1)
+		$array = array_fill(0, intval($_POST['num']), intval($_POST['lowerBound'])-1);
+
+		// Check if the difference between the upper and lower bounds exactly equals the size of the array
+		// This was added to decrease the server load instead of it going into a 'guess and check' algorithm that is used otherwise
+		if($diff == $_POST['num'])
+		{
+			// If the above statement is true then just fill the array with the values that range from the lower bound to the upper bound
+			// This array is already sorted so hopefully it will decrease server load
+			for($LCV = 0; $LCV < $_POST['num']; $LCV++)
+				$array[$LCV] = intval($_POST['lowerBound'])+$LCV;
+		}
+		else
+		{
+			// Run a loop to insert a unique value into each index
+			for($LCV = 0; $LCV <  intval($_POST['num']); $LCV++)
+			{
+				$inserted = false;
+
+				// Keep running until a value is inserted
+				while(!$inserted)
+				{
+					// Get a random number between the lower and upper bound
+					$rand = rand(intval($_POST['lowerBound']), intval($_POST['upperBound']));
+
+					// Check if the number is already in the array, thus making it not unique
+					if(!isset($occurances[$rand]))
+					{
+						// The value was unique and inserted into the array
+						$inserted = true;
+						$array[$LCV] = $rand;
+						$occurances[$rand] = 1;
+					}
+				}
+			}
+		}
 
 		echo "<br/>Array: ";
 
@@ -240,18 +317,13 @@ else // The user has submitted the form and all the data needed contained no err
 		echo "<input type='submit' value='Regenerate Array'>";
 		echo "</form>";
 	}
-	
-	$length = count($array)-1;
 
-	// This form will progress the user to the bubble sort simulator page
-	echo "<form action='bubble_sort.php' method='POST'>\n";
-	echo "<input type='hidden' name='array' value='" . serialize($array) . "'>\n";
-	echo "<input type='hidden' name='lineNum' value='0'>\n";
-	echo "<input type='hidden' name='outerVal' value='0'>\n";
-	echo "<input type='hidden' name='innerVal' value='0'>\n";
-	echo "<input type='hidden' name='length' value='$length'>\n";
-	echo "<input type='submit' value='Run Simulation'>\n";
-	echo "</form>\n";
+	// This form will progress the user to the binary search simulator page
+	// TODO point this to the final file name and pass the required parameters
+	echo "<form action='" . $_SERVER['PHP_SELF'] . "' method='POST'>";
+	echo "<input type='hidden' name='array' value='" . serialize($array) . "'>";
+	echo "<input type='submit' value='Run Simulation'>";
+	echo "</form>";
 }
 ?>
 </td>

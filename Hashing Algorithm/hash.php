@@ -1,12 +1,46 @@
-#!/usr/local/bin/php
-
-<table border='1' cellpadding='20' align='center'>
+<table border='0' cellpadding='0' align='center'>
 <tr>
 <td align='center'>
 
 <?php
 
-if(count($_POST) > 0)
+$begin = false;
+
+//   display the form
+
+
+if (!$begin AND ($error OR count($_POST) == 0))
+ 
+echo <<< EOT
+
+<h1>Overview</h1> 
+<h3>This demonstrates linear probing closed hashing. The primary hash function <br />
+is to take the key mod the table size. If the primary hash function yields a <br />
+collision, the next cell will be tried. If there is another collision, the cell following,<br /> 
+and so on, until an empty cell is found.</h3> 
+
+<form method="post" action="$_SERVER[PHP_SELF]">
+
+Indicate your initial Array Size:  <input type="radio" name="Size" value="7" checked />
+          7 &nbsp; &nbsp;
+      <input type="radio" name="Size" value="12" /> 12 &nbsp; &nbsp; <input type="radio" name="Size" value="15" /> 15<br /><br />
+
+Input Range: <input name="range1" value="$range1" size="3" maxlength="3" /> to <input name="range2" value="$range2" size="3" maxlength="3" />
+
+<br /><br />
+
+<input type = 'hidden' name = 'rand' value = "0">
+<input type = 'hidden' name = 'counter' value = "0">
+<input type = 'hidden' name = 'array' value = "0">
+<input type = 'hidden' name = 'compArray' value = "0">
+<input type = 'hidden' name = 'prev' value = "0">
+<input type="reset" /><input type="submit" name="Send" value="Submit" />
+</form>
+
+EOT;
+
+
+else 
 {
 	$range1 = $_POST['range1'];
 	$range2 = $_POST['range2'];
@@ -15,30 +49,28 @@ if(count($_POST) > 0)
 	$array = unserialize($_POST['array']);
 	$compArray = unserialize($_POST['compArray']);
 	$counter = $_POST['counter'];
-	$prev = $_POST['prev'];//Part of previous button code, not able to complete
+	$prev = $_POST['prev'];
 
-	
-	if ((!(is_numeric($range1) AND ($range1 >= 1 AND $range1 <= 999))) OR (!(is_numeric($range2) AND ($range2 >= 1 AND $range2 <= 999)))) 
+
+	if($prev == 1)
+	{
+		$count = $count - 2;
+	}
+
+	if ((!(is_numeric($range1) AND ($range1 >= 1 AND $range1 <= 100))) OR (!(is_numeric($range2) AND ($range2 >= 1 AND $range2 <= 100)))) 
     	{
     		$error = true;
-    		echo "<div style=\"color:red;\">Invalid Minimum Range.</div>\n";
+    		echo "<div style=\"color:red;\">Invalid Range.</div>\n";
     	}
 
 	if (($range1 > $range2) OR ($range1 == $range2)) 
     	{
     		$error = true;
-    		echo "<div style=\"color:red;\">Invalid Maximum Range.</div>\n";
+    		echo "<div style=\"color:red;\">Invalid Range.</div>\n";
     	}
 
 
-if(!$error){
-
-	/*if($prev == 1) //Part of previous button code, not able to complete
-	{
-		$count = $count - 2;
-	}*/
-
-	if($rand == 0) //generate random array
+	if($rand == 0)
 	{
 		$rand = array();
 		while (count($rand) < $Size ) 
@@ -55,13 +87,13 @@ if(!$error){
 
 //-----------------------------------------------------------------------------------------------------------------
 
-	function hashing($array, $array2, $comp, $num)//Hashing function
+	function hashing($array, $array2, $comp, $num)
 	{
 		$mod = mod($array[$num]);
 
-		if($array2[$mod] > -1)
+		if($array2[$mod] > 0)
 		{
-			while($array2[$mod] != -1)
+			while($array2[$mod] > 0)
 			{
 				$mod++;
 			}
@@ -85,7 +117,7 @@ if(!$error){
 
 //-----------------------------------------------------------------------------------------------------------------
 	
-	function initialArray($input, $size) //Array at top of screen
+	function initialArray($input, $size) 
 	{
 		$cols = $size;
 		$first = $size -1; 
@@ -109,7 +141,7 @@ if(!$error){
 
 //-----------------------------------------------------------------------------------------------------------------
 
-	function printArray($array, $comp, $num, $original, $mod) //prints array
+	function printArray($array, $comp, $num, $original, $mod)
 	{
 		echo "<table border='0' cellpadding='0' style='font-size:12pt;'>";
 		echo "<tr align='center' valign='bottom'>";
@@ -125,7 +157,7 @@ if(!$error){
 
 		for ($i = 0; $i < sizeof($array); $i++)
 		{
-			if ($array[$i] == -1)
+			if ($array[$i] == 0)
 				echo "<td width='40'>" . "*" . "</td>";
 			else
 			{
@@ -199,7 +231,6 @@ if(!$error){
 		if($print == 0) //Print text under graphics
 		{
 			$modValue = mod($value);
-			
 			echo "<h3><font color='red'>$value</font>%<font color='red'>10</font> = <font color='green'>$modValue</font><br/>";
 			echo "This statement is equvilent to <font color='red'>$value</font>/<font color='red'>10</font> leaving a remainder of <font color='green'>$modValue</font>.</h3>";
 			echo "<h3>The modulus 10 of <font color='red'>$value</font> equals <font color='green'>$modValue</font> resulting in its insertion to index [<font color='green'>$modValue</font>].</h3>";
@@ -218,7 +249,7 @@ if(!$error){
 
 			while (count($array) < 15) 
 			{
-        			$array[] = -1;
+        			$array[] = 0;
 			}
 		}
 	
@@ -251,7 +282,7 @@ if(!$error){
 		echo "<input type=\"submit\" name=\"submit\" value=\"Regenerate Array\">";
 		echo "</form>";
 
-		//Removing previous button until complete
+		//Remove previous button until complete
 		/*if($counting > 0)
 		{
 			// Previous
@@ -283,50 +314,10 @@ if(!$error){
 			echo "</form>";
 		}
 
-		if(sizeof($rand) <= $counter)
-		{
-			echo "<form method=\"POST\" action=\"\"/>";
-			echo "<input type=\"submit\" value=\"Return to Form\">";
-			echo "</form>";
-		}
-
 
 	}
+
 }
-}
-
-//display the form
-
-
-if ($error OR count($_POST) == 0)
- 
-echo <<< EOT
-
-<h1>Overview</h1> 
-<h3>This demonstrates linear probing closed hashing. The primary hash function <br />
-is to take the key mod the table size. If the primary hash function yields a <br />
-collision, the next cell will be tried. If there is another collision, the cell following,<br /> 
-and so on, until an empty cell is found.</h3> 
-
-<form method="post" action="$_SERVER[PHP_SELF]">
-
-Indicate your initial Array Size:  <input type="radio" name="Size" value="7" checked />
-          7 &nbsp; &nbsp;
-      <input type="radio" name="Size" value="12" /> 12 &nbsp; &nbsp; <input type="radio" name="Size" value="15" /> 15<br /><br />
-
-Random Numbers from Range: <input name="range1" value="$range1" size="3" maxlength="3" /> to <input name="range2" value="$range2" size="3" maxlength="3" />
-<br /><br />
-
-<input type = 'hidden' name = 'rand' value = "0">
-<input type = 'hidden' name = 'counter' value = "0">
-<input type = 'hidden' name = 'array' value = "0">
-<input type = 'hidden' name = 'compArray' value = "0">
-<input type = 'hidden' name = 'prev' value = "0">
-<input type="reset" /><input type="submit" name="Send" value="Submit" />
-</form>
-
-EOT;
-
 ?>
 
 </td>

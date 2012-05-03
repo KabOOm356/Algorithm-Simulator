@@ -4,9 +4,13 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Binary Search Algorithm Simulator</title>
 <script src="../res/javascript.js"></script>
+<script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js'></script>
+<script type='text/javascript' src='../js/jquery.easing.1.2.js'></script>
+<script type='text/javascript' src='../js/jquery.circulate.js'></script>
+<link rel="stylesheet" type="text/css" href="../css/SimCss.css" />
 </head>
 <body bgcolor="gray"  onkeypress="javascript: onKey(event);">
-	<table border='1' cellpadding='20' align='center'>
+	<table border='1' cellpadding='20' align='center'class="alpha60">
 		<tr>
 			<td align='center'>
 			<?php
@@ -116,11 +120,11 @@
 				echo "<tr align='center' valign='bottom'>";
 
 				for($LCV = 0; $LCV < count($aArray); $LCV++)
-					echo "<td width='52'>$LCV</td>";
+					echo "<td width='57'>$LCV</td>";
 					
 				echo "</tr></table>";
 
-				echo "<table border='1' cellpadding='5' style='font-size:18pt;'>";
+				echo "<table border='0' cellpadding='5' style='font-size:18pt;'>";
 				echo "<tr align='center'>";
 
 				for($LCV = 0; $LCV < count($aArray); $LCV++)
@@ -128,26 +132,26 @@
 					if(!isset($_POST['correct']) && $index != count($aArray)-2)
 					{
 						if($LCV < $index)
-							echo "<td width='40' bgcolor=gray>" . $aArray[$LCV] . "</td>";
+							echo "<td width='40' id='tableTD3'>" . $aArray[$LCV] . "</td>";
 						elseif($LCV == $index)
-							echo "<td width='40' bgcolor=yellow>" . $aArray[$LCV] . "</td>";
+							echo "<td width='40' id='tableTD1'>" . $aArray[$LCV] . "</td>";
 						elseif($LCV <= $currentIndex+1)
-							echo "<td width='40' bgcolor=red>" . $aArray[$LCV] . "</td>";
+							echo "<td width='40' id='tableTD4'>" . $aArray[$LCV] . "</td>";
 						else
-							echo "<td width='40' bgcolor=white>" . $aArray[$LCV] . "</td>";
+							echo "<td width='40' id='tableTD2'>" . $aArray[$LCV] . "</td>";
 					}
 					else
 					{
 						if($LCV < $index)
-							echo "<td width='40' bgcolor=gray>" . $aArray[$LCV] . "</td>";
+							echo "<td width='40' id='tableTD3'>" . $aArray[$LCV] . "</td>";
 						elseif($LCV == $index)
-							echo "<td width='40' bgcolor=yellow>" . $aArray[$LCV] . "</td>";
+							echo "<td width='40' id='tableTD1'>" . $aArray[$LCV] . "</td>";
 						elseif($LCV == $currentIndex)
-							echo "<td width='40' bgcolor=blue>" . $aArray[$LCV] . "</td>";
+							echo "<td width='40' id='tableTD6'>" . $aArray[$LCV] . "</td>";
 						elseif($LCV > $currentIndex)
-							echo "<td width='40' bgcolor=green>" . $aArray[$LCV] . "</td>";
+							echo "<td width='40' id='tableTD5'>" . $aArray[$LCV] . "</td>";
 						else
-							echo "<td width='40' bgcolor=white>" . $aArray[$LCV] . "</td>";
+							echo "<td width='40' id='tableTD2'>" . $aArray[$LCV] . "</td>";
 					}
 				}
 					
@@ -162,26 +166,26 @@
 					{
 						if(isset($_POST['correct']) && $LCV == $currentIndex+2)
 						{
-							echo "<td width='52'>&uarr;<br/>Insert<br/>Here<br/></td>";
+							echo "<td width='56'>&uarr;<br/>Insert<br/>Here<br/></td>";
 							if($index == 0)
-								echo "<td width='52'>&nbsp;<br/></td>";
+								echo "<td width='56'>&nbsp;<br/></td>";
 						}
 						elseif(!isset($_POST['correct']) && $LCV == $currentIndex+1)
 						{
-							echo "<td width='52'>&nbsp;<br/></td><td width='52'>&nbsp;<br/></td>";
-							echo "<td width='52'>&uarr;<br/>Insert<br/>Here<br/></td>";
+							echo "<td width='56'>&nbsp;<br/></td><td width='56'>&nbsp;<br/></td>";
+							echo "<td width='56'>&uarr;<br/>Insert<br/>Here<br/></td>";
 						}
 
-						echo "<td width='52'>&nbsp;<br/></td>";
+						echo "<td width='56'>&nbsp;<br/></td>";
 					}
 					elseif($LCV == $currentIndex+1 && !$done)
 					{
-						echo "<td width='52' colspan='2' align='center'><img src='img/moveRight.jpg'></td>";
+						echo "<td width='56' colspan='2' align='center'><img src='img/moveRight.jpg'></td>";
 					}
 					else
 					{
 						if($LCV != $currentIndex)
-							echo "<td width='52'>&nbsp;<br/></td>";	
+							echo "<td width='56'>&nbsp;<br/></td>";	
 					}
 				}
 
@@ -268,7 +272,7 @@
 					echo "</form>";
 					
 					// Form to go to the Binary Search Simulation menu
-					echo "<form action='index.php' action='POST'>";
+					echo "<form action='../index.php' action='POST'>";
 					echo "<input type='submit' value='Return to Simulator Selection Menu'>";
 					echo "</form>";
 				}

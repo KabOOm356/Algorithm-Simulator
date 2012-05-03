@@ -4,9 +4,10 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Binary Search Algorithm Simulator</title>
 <script src="../res/javascript.js"></script>
+<link rel="stylesheet" type="text/css" href="../css/SimCss.css" />
 </head>
 <body bgcolor="gray"  onkeypress="javascript: onKey(event);">
-	<table border='1' cellpadding='20' align='center'>
+	<table border='1' cellpadding='20' align='center' class="alpha60">
 		<tr>
 			<td align='center'>
 			<?php
@@ -167,11 +168,11 @@
 
 				// Print the indexes numbers
 				for($LCV = 0; $LCV < count($array); $LCV++)
-					echo "<td width='52'>$LCV</td>";
+					echo "<td width='57' align='center'>$LCV</td>";
 					
 				echo "</tr></table>";
 
-				echo "<table border='1' cellpadding='5' style='font-size:18pt;'>";
+				echo "<table border='0' cellpadding='5'  style='font-size:18pt;'>";
 				echo "<tr align='center'>";
 
 				// Check if the line number != -1
@@ -182,11 +183,11 @@
 					for($LCV = 0; $LCV < count($array); $LCV++)
 					{
 						if($done && $LCV == $mid && $lineNum != 8)
-							echo "<td width='40' bgcolor=yellow>" . $array[$LCV] . "</td>";
+							echo "<td width='40' id='tableTD1'>" . $array[$LCV] . "</td>";
 						elseif($LCV >= $firstNew && $LCV <= $lastNew)
-							echo "<td width='40' bgcolor=white>" . $array[$LCV] . "</td>";
+							echo "<td width='40' id='tableTD2'>" . $array[$LCV] . "</td>";
 						else
-							echo "<td width='40' bgcolor=gray>" . $array[$LCV] . "</td>";
+							echo "<td width='40' id='tableTD3'>" . $array[$LCV] . "</td>";
 					}
 
 					echo "</tr></table>";
@@ -201,7 +202,7 @@
 						// Output that the value has been found and output an arrow pointing to the index where it was found
 						for($LCV = -1; $LCV < count($array)+1; $LCV++)
 						{
-							echo "<td width='52'>";
+							echo "<td width='56'>";
 							if($LCV == $mid)
 								echo "&uarr;<br/>Found the Value!<br/>";
 							echo "&nbsp;<br/>";
@@ -213,7 +214,7 @@
 						// Display arrows pointing to the indexes of variables first, mid, and last
 						for($LCV = -1; $LCV < count($array)+1; $LCV++)
 						{
-							echo "<td width='52'>";
+							echo "<td width='56'>";
 							if($LCV == $firstNew)
 								echo "&uarr;<br/>First<br/>";
 							if($LCV == $lastNew)
@@ -235,9 +236,9 @@
 					for($LCV = 0; $LCV < count($array); $LCV++)
 					{
 						if($LCV == (-($mid) - 1))
-							echo "<td width='40' bgcolor=yellow>" . $array[$LCV] . "</td>";
+							echo "<td width='40' id='tableTD1'>" . $array[$LCV] . "</td>";
 						else
-							echo "<td width='40' bgcolor=gray>" . $array[$LCV] . "</td>";
+							echo "<td width='40' id='tableTD3'>" . $array[$LCV] . "</td>";
 					}
 					
 					echo "</tr></table>";
@@ -248,7 +249,7 @@
 					// Display the arrow to where the search for value should be inserted
 					for($LCV = 0; $LCV < count($array); $LCV++)
 					{
-						echo "<td width='52'>";
+						echo "<td width='56'>";
 						if($LCV == (-($mid) - 1))
 							echo "&uarr;<br/>Insert<br/>Here<br/>";
 
@@ -401,7 +402,7 @@
 								echo "</form>";
 
 								// Form to return to the Binary Search Algorithm menu
-								echo "<form action='index.php' action='POST'>";
+								echo "<form action='../index.php' action='POST'>";
 								echo "<input type='submit' value='Return to Simulator Selection Menu'>";
 								echo "</form>";
 
@@ -436,7 +437,7 @@
 						echo "</form>";
 
 						// Form to return to the Binary Search Algorithm menu
-						echo "<form action='index.php' action='POST'>";
+						echo "<form action='../index.php' action='POST'>";
 						echo "<input type='submit' value='Return to Simulator Selection Menu'>";
 						echo "</form>";
 					}
@@ -505,5 +506,9 @@
 			?></td>
 		</tr>
 	</table>
+	<script src="res/javascript.js"></script>
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
+<script type="text/javascript" src="js/jquery.easing.1.2.js"></script>
+<script type="text/javascript" src="js/jquery.circulate.js"></script>
 </body>
 </html>

@@ -4,8 +4,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Binary Search Algorithm Simulator</title>
 </head>
-<body bgcolor="gray">
-<table border='1' cellpadding='20' align='center'>
+<table border='0' cellpadding='0' align='center'>
 <tr>
 <td align='center'>
 <?php
@@ -156,31 +155,7 @@ if(isset($_POST['run']))
 // If there were errors or the user has not seen the entry page, display the entry form
 if(!$start)
 {
-	// Header 1
-	echo "<p><h1>Introduction to Binary Search Algorithm Simulator</h1></p>";
-
-	// Display the last time the file was updated
 	echo '<p>This file was last updated: ' . date ('F d Y H:i:s.', getlastmod()) . "</p>";
-
-	// A description of the Binary Search Algorithm
-	echo "<p>The Binary Search Algorithm is a search algorithm that when given a sorted array, without duplicate entries, will return the index of the<br/>
-			number to search for or the index of where to insert the number.  The algorithm functions by at each step selecting the middle value of the array then<br/>
-			comparing the search value to that value.  Depending on if the value to search for is smaller or larger we can rule out that it is not in the lower or upper<br/>
-			half of the array, successfully cutting out half of the array in one step.</p>";
-
-	// Paragraph 2 of the description of the Binary Search Algorithm
-	echo "<p>The Binary Search Algorithm is an algorithm that functions in worst case O(log(n)) time.  Making this algorithm much faster than a linear<br/>
-			search on large amounts of data.  This is due to the property of the Binary Search Algorithmto split the array in half and shift the<br/>
-			frame of search indecies at each step.  The best case scenario is if the value to search for is exacly in the middle of the array which<br/>
-			would make the time complexity O(1), constant time complexity.</p>";
-
-	// The purpose/intent of this simulation
-	echo "<p>The purpose of this simulation is to help teach computer science students the Binary Search Algorithm.  This simulation will allow you to<br>
-			select input data to feed into the simulation.  The simulation is completely dynamic and will operate differently according to the input data.<br>
-			The simulator will run through all the steps of the Binary Search Algorithm with a visual and detailed comments of what is happening at each step.<br/>
-			If the value that was searched for is not in the array then you will be given a choice to continue to an insertion simulator, to teach you how to<br/>
-			properly insert the value into the array.</p>";
-
 	// The main form
 	echo "<form action='" . $_SERVER['PHP_SELF'] . "' method='POST'>";
 	echo "Specify number of initial values in array: ";
@@ -234,9 +209,6 @@ if(!$start)
 	
 	echo "<input type='Submit' name='run' value='Run Simulator'>  <input type='reset' value='Reset'>";
 	echo "</form>";
-	echo "<form action='../index.php' method='POST'>";
-	echo "<input type='submit' value='Return to Simulation Selection'>";
-	echo "</form>";
 }
 else // The user has submitted the form and all the data needed contained no errors.  Show a confirmation screen before continuing to the simulation
 {
@@ -244,7 +216,7 @@ else // The user has submitted the form and all the data needed contained no err
 	echo "<h1>Input Summary</h1>";
 
 	// Display the specified size of the array
-	echo "Size of array: " . $_POST['num'] . "<br/><br/>";
+	echo "Size of array: " . $_POST['num'] . "<br/>";
 	
 	// If the user specified to generate a random array
 	if($_POST['values'] == 'random')
@@ -304,7 +276,7 @@ else // The user has submitted the form and all the data needed contained no err
 		// Sort the array
 		sort($array);
 
-		echo "<br/>Array: ";
+		echo "Array: ";
 
 		// Display the array to the user
 		for($LCV = 0; $LCV < count($array); $LCV++)
@@ -334,10 +306,10 @@ else // The user has submitted the form and all the data needed contained no err
 		}
 	}
 	
-	$insert = (isset($_POST['insert'])) ? "True<br/><br/>" : "False<br/><br/>";
+	$insert = (isset($_POST['insert'])) ? "True<br/>" : "False<br/>";
 
 	// Display if the user wanted to automatically progress to the insertion simulator if the value does not exist
-	echo "<br/><br/>Insert value if it does not exist in the array: $insert";
+	echo "<br/>Insert value if it does not exist in the array: $insert";
 	
 	// Display the value to search the array for
 	echo "Value to search for: " . intval($_POST['search']);
@@ -377,7 +349,7 @@ else // The user has submitted the form and all the data needed contained no err
 	}
 
 	// This form will progress the user to the binary search simulator page
-	echo "<form action='binarySimulation.php' method='POST'>";
+	echo "<form action='binarySimulation.php' method='POST' target='_top'>";
 	echo "<input type='hidden' name='search' value='" . intval($_POST['search']) . "'>";
 	echo "<input type='hidden' name='array' value='" . serialize($array) . "'>";
 	if(isset($_POST['insert']))

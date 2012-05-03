@@ -13,3 +13,34 @@ function previousPage()
 {
 	history.go(-1);
 }
+
+$(window).load(function() {
+/*
+    $("#tableTD1").each(function() {
+        $(this).circulate({
+            speed: Math.floor(Math.random()*300) + 100,
+            height: Math.floor(Math.random()*1000) - 470,
+            width: Math.floor(Math.random()*1000) - 470
+        });
+    }).click(function() {
+        $(this).circulate({
+            speed: Math.floor(Math.random()*300) + 100,
+            height: Math.floor(Math.random()*1000) - 470,
+            width: Math.floor(Math.random()*1000) - 470
+        });
+    });
+	*/
+	function startBallThree() {
+        $("#tableTD2").circulate({
+            speed: 4000,
+            height: 140,
+            width: -700,
+            sizeAdjustment: 30,
+            loop: true,
+            zIndexValues: [3, 3, 1, 1]
+        }).fadeIn();
+    }
+            
+    setTimeout(startBallThree, 2000);
+    
+});

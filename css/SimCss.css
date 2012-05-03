@@ -1,0 +1,121 @@
+/* General Demo Style */
+body{
+	background:#e4ebe9 url(../images/pattern.png) repeat top left;
+	color:#;
+	font-family: 'PT Sans Narrow', Arial, sans-serif;
+	font-size:12px;
+}
+
+.clr{
+	clear:both;
+}
+h1, h5{
+	margin:15px;
+	font-size:44px;
+	color:#000;
+	font-family: 'Rochester', sans-serif;
+	text-shadow:1px 1px 1px #fff;
+	text-align:center;
+}
+h1 span, h5{
+	font-size:20px;
+	display:block;
+	color:#60817a;
+}
+/* Header Style */
+.header{
+	height:25px;
+	line-height:24px;
+	font-size:13px;
+	background:#000;
+	opacity:0.9;
+	text-transform:uppercase;
+	z-index:4;
+}
+.header a{
+	padding:5px 10px;
+	letter-spacing:1px;
+	text-shadow:1px 1px 1px #000;
+	color:#ddd;
+	text-align:right;
+}
+.header a:hover{
+	color:#fff;
+}
+.header a span{
+	font-weight:bold;
+}
+.header span.right_ab{
+	position:absolute;
+	right:4px;
+}
+#loadResuts{
+	overflow:auto;
+}
+
+#tableTD1{
+background-color: yellow;
+ border: 3px solid #333;
+ height: 40px;
+ -moz-border-radius:25px;
+ -webkit-border-radius: 25px;
+ width: 40px;
+}
+#tableTD2{
+background-color: #fff;
+ border: 3px solid #333;
+ height: 40px;
+ -moz-border-radius:25px;
+ -webkit-border-radius: 25px;
+ width: 40px;
+}
+#tableTD3{
+background-color: #cccccc;
+border: 3px solid #333;
+ height: 40px;
+ -moz-border-radius:25px;
+ -webkit-border-radius: 25px;
+ width: 40px;
+}
+#tableTD4{
+background-color: red;
+border: 3px solid #333;
+ height: 40px;
+ -moz-border-radius:25px;
+ -webkit-border-radius: 25px;
+ width: 40px;
+}
+#tableTD5{
+background-color: green;
+border: 3px solid #333;
+ height: 40px;
+ -moz-border-radius:25px;
+ -webkit-border-radius: 25px;
+ width: 40px;
+}
+#tableTD6{
+background-color: blue;
+border: 3px solid #333;
+ height: 40px;
+ -moz-border-radius:25px;
+ -webkit-border-radius: 25px;
+ width: 40px;
+}
+.alpha60 {
+	/* Fallback for web browsers that doesn't support RGBa */
+	background: rgb(255, 255, 255);
+	/* RGBa with 0.6 opacity */
+	background: rgba(255, 255, 255, 0.6);
+	/* For IE 5.5 - 7*/
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#00000000, endColorstr=#99000000);
+	/* For IE 8*/
+	-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#00000000, endColorstr=#99000000)";
+}
+.error  { 
+		 
+		 font-weight:normal;
+		 color:red;
+		 text-align:left;
+		 width:140px; 
+		 padding-left:25px;
+}
