@@ -1,46 +1,15 @@
-<table border='0' cellpadding='0' align='center'>
+<html>
+<head>
+<script src="../res/javascript.js" type="text/javascript"></script>
+</head>
+<body bgcolor="gray" onkeypress="javascript: onKey(event);">
+<table border='1' cellpadding='20' align='center'>
 <tr>
 <td align='center'>
 
 <?php
 
-$begin = false;
-
-//   display the form
-
-
-if (!$begin AND ($error OR count($_POST) == 0))
- 
-echo <<< EOT
-
-<h1>Overview</h1> 
-<h3>This demonstrates linear probing closed hashing. The primary hash function <br />
-is to take the key mod the table size. If the primary hash function yields a <br />
-collision, the next cell will be tried. If there is another collision, the cell following,<br /> 
-and so on, until an empty cell is found.</h3> 
-
-<form method="post" action="$_SERVER[PHP_SELF]">
-
-Indicate your initial Array Size:  <input type="radio" name="Size" value="7" checked />
-          7 &nbsp; &nbsp;
-      <input type="radio" name="Size" value="12" /> 12 &nbsp; &nbsp; <input type="radio" name="Size" value="15" /> 15<br /><br />
-
-Input Range: <input name="range1" value="$range1" size="3" maxlength="3" /> to <input name="range2" value="$range2" size="3" maxlength="3" />
-
-<br /><br />
-
-<input type = 'hidden' name = 'rand' value = "0">
-<input type = 'hidden' name = 'counter' value = "0">
-<input type = 'hidden' name = 'array' value = "0">
-<input type = 'hidden' name = 'compArray' value = "0">
-<input type = 'hidden' name = 'prev' value = "0">
-<input type="reset" /><input type="submit" name="Send" value="Submit" />
-</form>
-
-EOT;
-
-
-else 
+if(count($_POST) > 0)
 {
 	$range1 = $_POST['range1'];
 	$range2 = $_POST['range2'];
@@ -49,28 +18,30 @@ else
 	$array = unserialize($_POST['array']);
 	$compArray = unserialize($_POST['compArray']);
 	$counter = $_POST['counter'];
-	$prev = $_POST['prev'];
+	$prev = $_POST['prev'];//Part of previous button code, not able to complete
 
-
-	if($prev == 1)
-	{
-		$count = $count - 2;
-	}
-
-	if ((!(is_numeric($range1) AND ($range1 >= 1 AND $range1 <= 100))) OR (!(is_numeric($range2) AND ($range2 >= 1 AND $range2 <= 100)))) 
+	
+	if ((!(is_numeric($range1) AND ($range1 >= 1 AND $range1 <= 999))) OR (!(is_numeric($range2) AND ($range2 >= 1 AND $range2 <= 999)))) 
     	{
     		$error = true;
-    		echo "<div style=\"color:red;\">Invalid Range.</div>\n";
+    		echo "<div style=\"color:red;\">Invalid Minimum Range.</div>\n";
     	}
 
 	if (($range1 > $range2) OR ($range1 == $range2)) 
     	{
     		$error = true;
-    		echo "<div style=\"color:red;\">Invalid Range.</div>\n";
+    		echo "<div style=\"color:red;\">Invalid Maximum Range.</div>\n";
     	}
 
 
-	if($rand == 0)
+if(!$error){
+
+	/*if($prev == 1) //Part of previous button code, not able to complete
+	{
+		$count = $count - 2;
+	}*/
+
+	if($rand == 0) //generate random array
 	{
 		$rand = array();
 		while (count($rand) < $Size ) 
@@ -87,13 +58,13 @@ else
 
 //-----------------------------------------------------------------------------------------------------------------
 
-	function hashing($array, $array2, $comp, $num)
+	function hashing($array, $array2, $comp, $num)//Hashing function
 	{
 		$mod = mod($array[$num]);
 
-		if($array2[$mod] > 0)
+		if($array2[$mod] > -1)
 		{
-			while($array2[$mod] > 0)
+			while($array2[$mod] != -1)
 			{
 				$mod++;
 			}
@@ -117,7 +88,7 @@ else
 
 //-----------------------------------------------------------------------------------------------------------------
 	
-	function initialArray($input, $size) 
+	function initialArray($input, $size) //Array at top of screen
 	{
 		$cols = $size;
 		$first = $size -1; 
@@ -141,7 +112,7 @@ else
 
 //-----------------------------------------------------------------------------------------------------------------
 
-	function printArray($array, $comp, $num, $original, $mod)
+	function printArray($array, $comp, $num, $original, $mod) //prints array
 	{
 		echo "<table border='0' cellpadding='0' style='font-size:12pt;'>";
 		echo "<tr align='center' valign='bottom'>";
@@ -157,7 +128,7 @@ else
 
 		for ($i = 0; $i < sizeof($array); $i++)
 		{
-			if ($array[$i] == 0)
+			if ($array[$i] == -1)
 				echo "<td width='40'>" . "*" . "</td>";
 			else
 			{
@@ -182,8 +153,8 @@ else
 	
 			if(mod($array[$i]) != $i AND $array[$i-1] > 0 AND ($number > 0) AND ($comp[$i] != $array[$i]))
 			{
-				echo "<img src=\"http://students.cse.unt.edu/~dad0176/class/3410/alert.png\" /><br/><font color='red'><b>Collision Detected</b></font><br/>";
-				echo "<img src=\"http://students.cse.unt.edu/~dad0176/class/3410/arrow.png\" /><br/><b>Move to index [<font color='green'>" . ($i) . "</font>]</b><br/>";
+				echo "<img src=\"alert.png\" /><br/><font color='red'><b>Collision Detected</b></font><br/>";
+				echo "<img src=\"arrow.png\" /><br/><b>Move to index [<font color='green'>" . ($i) . "</font>]</b><br/>";
 				$loop = 1;
 				$print = 1;
 				$index = $i-1;
@@ -192,7 +163,7 @@ else
 
 			else if ($number > 0 AND ($comp[$i] != $array[$i]))
 			{
-				echo "<img src=\"http://students.cse.unt.edu/~dad0176/class/3410/arrow.png\" /><br/>";
+				echo "<img src=\"arrow.png\" /><br/>";
 				$loop = 1;
 				$print = 0;
 				$index = $i-1;
@@ -231,6 +202,7 @@ else
 		if($print == 0) //Print text under graphics
 		{
 			$modValue = mod($value);
+			
 			echo "<h3><font color='red'>$value</font>%<font color='red'>10</font> = <font color='green'>$modValue</font><br/>";
 			echo "This statement is equvilent to <font color='red'>$value</font>/<font color='red'>10</font> leaving a remainder of <font color='green'>$modValue</font>.</h3>";
 			echo "<h3>The modulus 10 of <font color='red'>$value</font> equals <font color='green'>$modValue</font> resulting in its insertion to index [<font color='green'>$modValue</font>].</h3>";
@@ -249,7 +221,7 @@ else
 
 			while (count($array) < 15) 
 			{
-        			$array[] = 0;
+        			$array[] = -1;
 			}
 		}
 	
@@ -282,27 +254,15 @@ else
 		echo "<input type=\"submit\" name=\"submit\" value=\"Regenerate Array\">";
 		echo "</form>";
 
-		//Remove previous button until complete
-		/*if($counting > 0)
-		{
-			// Previous
-			echo "<form method=\"POST\" action=\"" . $_SERVER['PHP_SELF'] . "\">";
-			echo "<input type=\"hidden\" name=\"Size\" value=\"" . $_POST['Size'] . "\">";
-			echo "<input type=\"hidden\" name=\"range1\" value=\"" . $_POST['range1'] . "\">";
-			echo "<input type=\"hidden\" name=\"range2\" value=\"" . $_POST['range2'] . "\">";
-			echo "<input type=\"hidden\" name=\"rand\" value=\"" . $_POST['rand'] . "\">";
-			echo "<input type=\"hidden\" name=\"array\" value=\"" . $_POST['compArray'] . "\">";
-			echo "<input type=\"hidden\" name=\"counter\" value=\"" . $_POST['counter'] . "\">";
-			echo "<input type=\"hidden\" name=\"prev\" value=\"1\">";
-			echo "<input type=\"submit\" value=\"Previous\">";
-			echo "</form>";
-		}*/
+		echo "<form>";
+		echo "<input type=\"button\" value=\"Previous Step in Simulation\" onClick=\"javascript: previousPage();\">";
+		echo "</form>";
 
 	
 		if(sizeof($rand) > $counter)
 		{
 			// Next
-			echo "<form method=\"POST\" action=\"" . $_SERVER['PHP_SELF'] . "\">";
+			echo "<form name=\"form\" method=\"POST\" action=\"" . $_SERVER['PHP_SELF'] . "\">";
 			echo "<input type=\"hidden\" name=\"Size\" value=\"" . $_POST['Size'] . "\">";
 			echo "<input type=\"hidden\" name=\"range1\" value=\"" . $_POST['range1'] . "\">";
 			echo "<input type=\"hidden\" name=\"range2\" value=\"" . $_POST['range2'] . "\">";
@@ -314,12 +274,54 @@ else
 			echo "</form>";
 		}
 
+		if(sizeof($rand) <= $counter)
+		{
+			echo "<form method=\"POST\" action=\"\"/>";
+			echo "<input type=\"submit\" value=\"Return to Form\">";
+			echo "</form>";
+		}
+
 
 	}
-
 }
+}
+
+//display the form
+
+
+if ($error OR count($_POST) == 0)
+ 
+echo <<< EOT
+
+<h1>Overview</h1> 
+<h3>This demonstrates linear probing closed hashing. The primary hash function <br />
+is to take the key mod the table size. If the primary hash function yields a <br />
+collision, the next cell will be tried. If there is another collision, the cell following,<br /> 
+and so on, until an empty cell is found.</h3> 
+
+<form method="post" action="$_SERVER[PHP_SELF]">
+
+Indicate your initial Array Size:  <input type="radio" name="Size" value="7" checked />
+          7 &nbsp; &nbsp;
+      <input type="radio" name="Size" value="12" /> 12 &nbsp; &nbsp; <input type="radio" name="Size" value="15" /> 15<br /><br />
+
+Random Numbers from Range: <input name="range1" value="$range1" size="3" maxlength="3" /> to <input name="range2" value="$range2" size="3" maxlength="3" />
+<br /><br />
+
+<input type = 'hidden' name = 'rand' value = "0">
+<input type = 'hidden' name = 'counter' value = "0">
+<input type = 'hidden' name = 'array' value = "0">
+<input type = 'hidden' name = 'compArray' value = "0">
+<input type = 'hidden' name = 'prev' value = "0">
+<input type="reset" /><input type="submit" name="Send" value="Submit" />
+</form>
+
+EOT;
+
 ?>
 
 </td>
 </tr>
 </table>
+</body>
+</html>

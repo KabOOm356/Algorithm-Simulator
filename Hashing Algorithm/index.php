@@ -7,7 +7,14 @@
 <table border='0' cellpadding='0' align='center'>
 <tr>
 <td align='center'>
+<form action="hash.php" target='_top'>
+<input type="submit" value="Continue to simulator..."/>
+</form>
 <?php
+
+// A quick fix to make hash.php get the info from the user
+exit();
+
 $start=false;
 
 if(isset($_POST['run']))
@@ -313,11 +320,12 @@ else // The user has submitted the form and all the data needed contained no err
 	// This form will progress the user to the simulator
 	echo "<form action='hash.php' method='POST'>";
 	echo "<input type='hidden' name='array' value='" . serialize($array) . "'>";
-	echo "<input type = 'hidden' name = 'rand' value = \"0\">";
+	echo "<input type = 'hidden' name = 'range1' value='" . $_POST['lowerBound'] . "'>";
+	echo "<input type = 'hidden' name = 'range2' value='" . $_POST['upperBound'] . "'>";
 	echo "<input type = 'hidden' name = 'counter' value = \"0\">";
-	echo "<input type = 'hidden' name = 'array' value = \"0\">";
+	echo "<input type = 'hidden' name = 'rand' value = \"0\">";
 	echo "<input type = 'hidden' name = 'compArray' value = \"0\">";
-	echo "<input type = 'hidden' name = 'prev' value = \"0\">";
+	echo "<input type = 'hidden' name = 'Size' value='" . $_POST['num'] . "'>";
 	echo "<input type='submit' value='Run Simulation'>";
 	echo "</form>";
 }
