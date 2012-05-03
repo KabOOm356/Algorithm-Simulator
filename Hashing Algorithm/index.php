@@ -311,8 +311,7 @@ else // The user has submitted the form and all the data needed contained no err
 	}
 
 	// This form will progress the user to the binary search simulator page
-	// TODO point this to the final file name and pass the required parameters
-	echo "<form action='" . $_SERVER['PHP_SELF'] . "' method='POST'>";
+	echo "<form action='hash.php' method='POST'>";
 	echo "<input type='hidden' name='array' value='" . serialize($array) . "'>";
 	echo "<input type='submit' value='Run Simulation'>";
 	echo "</form>";
