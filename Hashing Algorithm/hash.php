@@ -276,8 +276,8 @@ if(!$error){
 
 		if(sizeof($rand) <= $counter)
 		{
-			echo "<form method=\"POST\" action=\"\"/>";
-			echo "<input type=\"submit\" value=\"Return to Form\">";
+			echo "<form name='form' action='../index.php' method='POST'>";
+			echo "<input type='submit' value='Return to Simulator Selection Menu'>";
 			echo "</form>";
 		}
 
