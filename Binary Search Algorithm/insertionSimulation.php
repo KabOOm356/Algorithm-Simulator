@@ -180,7 +180,7 @@
 					}
 					elseif($LCV == $currentIndex+1 && !$done)
 					{
-						echo "<td width='56' colspan='2' align='center'><img src='img/moveRight.jpg'></td>";
+						echo "<td width='56' colspan='2' align='center'><img src='img/moveRight.png'></td>";
 					}
 					else
 					{
