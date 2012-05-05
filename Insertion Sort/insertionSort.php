@@ -458,6 +458,7 @@
 	function arrowArrayOriginal($array){
 		// Print the indexes
 		echo "<div align = \"center\">";
+		echo "<p>ORIGINAL ARRAY</p>";
 		echo "<table border='0' cellpadding='0' style='font-size:12pt;'>";
 		echo "<tr align='center' valign='bottom'>";
 	
@@ -488,6 +489,7 @@
 	function arrowArray($array, $ival, $jval){
 		// Print the indexes
 		echo "<div align=\"center\">";
+		echo "<p>CURRENT ARRAY</p>";
 		echo "<table border='0' cellpadding='0' style='font-size:12pt;'>";
 		echo "<tr align='center' valign='bottom'>";
 		

@@ -34,6 +34,7 @@ function bubbleSort($array)
 function arrowArray($array, $ival, $jval){
 	// Print the indexes
 	echo "<div align=\"center\">";
+	echo "<p>CURRENT ARRAY</p>";
 	echo "<table border='0' cellpadding='0' style='font-size:12pt;'>";
 	echo "<tr align='center' valign='bottom'>";
 
@@ -81,6 +82,7 @@ function arrowArray($array, $ival, $jval){
 function arrowArrayOriginal($array){
 	// Print the indexes
 	echo "<div align = \"center\">";
+	echo "<p>ORIGINAL ARRAY</p>";
 	echo "<table border='0' cellpadding='0' style='font-size:12pt;'>";
 	echo "<tr align='center' valign='bottom'>";
 
@@ -238,7 +240,7 @@ function set_up_values(){
 }
 function showCurrentArray($currentArray, $outerVal1, $innerVal1){
 	echo "<div align = \"center\">";
-	echo "CURRENT ARRAY";
+	echo "<p>CURRENT ARRAY</p>";
 	/*
 	 echo "<table border='1' cellpadding='5' style='font-size:12pt;'>";
 	echo "<tr>";
