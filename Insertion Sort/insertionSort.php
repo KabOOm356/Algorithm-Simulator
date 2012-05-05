@@ -5,10 +5,9 @@
 <script src="../res/javascript.js" type="text/javascript"></script>
 </head>
 <body onkeypress="javascript: onKey(event);">
-	<table border = "1">
+	<table border="1">
 		<tr>
-			<td>
-                        <?php
+			<td><?php
 
 			set_up_values();
 
@@ -20,12 +19,6 @@
 				$j = $_POST['jValue'];
 				$tmp_val = $_POST['tmpVal'];
 
-
-				echo "DEBUG STUFF";
-				echo "<br />";
-				echo "line num: $lineNum <br />\n";
-				echo "i: $i <br />\n";
-				echo "j: $j <br />\n";
 
 				insertion_sort1($array,$i,$j,$lineNum,$tmp_val,$arrayCopy);
 			}
@@ -116,7 +109,7 @@
 			}
 
 			function written_section1($array1,$i,$j,$lineNum,$tmp_val){
-				
+
 				if($lineNum==0){
 					$count = count($array1);
 					echo "<p> This part of the algorithm will compare the value of j to the total count of the array. The value of j is {$j}. The array count is {$count}.";
@@ -139,82 +132,82 @@
 						echo "Because both of our while-loop conditions are satisfied, we will enter the loop.</p> <br />";
 					}else{
 						echo "The conditions for the while-loop were not met with our current values for i, array[i-1], and our temp variable. We will pass over the while-loop. </p> <br />";
+					}
+				}elseif($lineNum==3){
+					$quick_var1 = $array1[$i];
+					$quick_var2 = $array1[$i-1];
+					$quick_var3 = $i+1;
+					echo "<p>We have entered the while-loop. We will set array[i] to equal array[i-1] because array[i] equals {$quick_var1}. That number is less than ";
+					echo "array[i-1], which is equal to $quick_var2. Also, this section of the sort will decrement i from $quick_var3 to {$i}. ";
+					echo "Now, we will go back to the top of the while-statement. </p> <br />";
+				}elseif($lineNum==4){
+					echo "<p>We have passed over the while-loop and this means we know the index we need to place our temp variable. Our array[\i] will now equal our temp variable,";
+					echo " which is {$tmp_val}.</p> <br />";
+				}elseif($lineNum==5){
+					echo "Since we have passed over the for-loop we have been thrown out of the scope of the sort and our array is now sorted!</p> <br />";
+				}
 			}
-		}elseif($lineNum==3){
-			$quick_var1 = $array1[$i];
-			$quick_var2 = $array1[$i-1];
-			$quick_var3 = $i+1;
-			echo "<p>We have entered the while-loop. We will set array[i] to equal array[i-1] because array[i] equals {$quick_var1}. That number is less than ";
-			echo "array[i-1], which is equal to $quick_var2. Also, this section of the sort will decrement i from $quick_var3 to {$i}. ";
-			echo "Now, we will go back to the top of the while-statement. </p> <br />";
-		}elseif($lineNum==4){
-			echo "<p>We have passed over the while-loop and this means we know the index we need to place our temp variable. Our array[\i] will now equal our temp variable,";
-			echo " which is {$tmp_val}.</p> <br />";
-		}elseif($lineNum==5){
-			echo "Since we have passed over the for-loop we have been thrown out of the scope of the sort and our array is now sorted!</p> <br />";
-		}
-	}
-	function showOriginalArray($array)
-	{
-		echo "<div align = \"center\">";
-		echo "ORIGINAL ARRAY";
-		echo "<table cellpadding='5' style='font-size:18pt;'>";
-		echo "<tr>";
-		for ($i=0; $i < count($array); $i++)
-		{
-
-			echo "<td>$array[$i]</td>";
-
-		}
-		echo "</tr>";
-		echo "</table>";
-		echo "</div>";
-		echo "<br />";
-		echo "<br />";
-		echo "<br />";
-
-
-	}
-
-	function showCurrentArray($array, $i1, $j1)
-	{
-		echo "<div align = \"center\">";
-		echo "CURRENT ARRAY";
-		/*
-		 echo "<table border='1' cellpadding='5' style='font-size:12pt;'>";
-		echo "<tr>";
-		for ($i=0; $i < count($array); $i++)
-		{
-
-		echo "<td>$i</td>";
-
-		}
-		echo "</tr>";
-		echo "</table>";
-		*/
-		echo "<table  cellpadding='5' style='font-size:18pt;'>";
-
-		echo "<tr>";
-		for ($i=0; $i < count($array); $i++)
-		{
-
-			echo "<td>$array[$i]</td>";
-
-		}
-		echo "</tr>";
-		echo "<tr>";
-		for ($i=0; $i < count($array); $i++)
-		{
-			if($i1==$j1)
+			function showOriginalArray($array)
 			{
-				if($i==$i1){
-					echo "<td style=\"background-color:red;\">&uarr;</td>";
-				}else{
-					echo "<td>*</td>";
-				}	
-			}else{
-				if($i==$i1){
-					echo "<td style=\"background-color:red;\">&uarr;</td>";
+				echo "<div align = \"center\">";
+				echo "ORIGINAL ARRAY";
+				echo "<table cellpadding='5' style='font-size:18pt;'>";
+				echo "<tr>";
+				for ($i=0; $i < count($array); $i++)
+				{
+
+					echo "<td>$array[$i]</td>";
+
+				}
+				echo "</tr>";
+				echo "</table>";
+				echo "</div>";
+				echo "<br />";
+				echo "<br />";
+				echo "<br />";
+
+
+			}
+
+			function showCurrentArray($array, $i1, $j1)
+			{
+				echo "<div align = \"center\">";
+				echo "CURRENT ARRAY";
+				/*
+				 echo "<table border='1' cellpadding='5' style='font-size:12pt;'>";
+				echo "<tr>";
+				for ($i=0; $i < count($array); $i++)
+				{
+
+				echo "<td>$i</td>";
+
+				}
+				echo "</tr>";
+				echo "</table>";
+				*/
+				echo "<table  cellpadding='5' style='font-size:18pt;'>";
+
+				echo "<tr>";
+				for ($i=0; $i < count($array); $i++)
+				{
+
+					echo "<td>$array[$i]</td>";
+
+				}
+				echo "</tr>";
+				echo "<tr>";
+				for ($i=0; $i < count($array); $i++)
+				{
+					if($i1==$j1)
+					{
+						if($i==$i1){
+							echo "<td style=\"background-color:red;\">&uarr;</td>";
+						}else{
+							echo "<td>*</td>";
+						}
+					}else{
+						if($i==$i1){
+							echo "<td style=\"background-color:red;\">&uarr;</td>";
 				}else if($i==$j1){
 					echo "<td style=\"background-color:blue;\">&uarr;</td>";
 				}else{
@@ -313,8 +306,12 @@
 		bracketed number at the beginning of the section. That bracketed number is the line number
 		variable used in the switch statement below.
 		*/
-		showOriginalArray($originalArray);
 		
+		//showOriginalArray($originalArray);
+		arrowArrayOriginal($originalArray);
+		//arrowArray($array_copy, $i, $j);
+                
+                
 		switch($lineNum)
 		{
 			/*
@@ -323,9 +320,13 @@
 			*/
 			case 0:
 
+				
+				
 				show_algorithm1(0);
 				//show_array($array1);
-				showCurrentArray($array_copy, $i, $j);
+				
+                                //showCurrentArray($array_copy, $i, $j);
+                                arrowArray($array_copy, $i, $j);
 				written_section1($array_copy,$i,$j,$lineNum,$tmp_val);
 				
 
@@ -351,7 +352,8 @@
 				$i = $j;
 				show_algorithm1(1);
 				//show_array($array_copy);
-				showCurrentArray($array_copy, $i, $j);
+				//showCurrentArray($array_copy, $i, $j);
+                                arrowArray($array_copy, $i, $j);
 				written_section1($array_copy,$i,$j,$lineNum,$tmp_val);
 					
 				$lineNum = 2;
@@ -370,7 +372,8 @@
 
 				show_algorithm1(2);
 				//show_array($array_copy);
-				showCurrentArray($array_copy, $i, $j);
+				//showCurrentArray($array_copy, $i, $j);
+                                arrowArray($array_copy, $i, $j);
 				written_section1($array_copy,$i,$j,$lineNum,$tmp_val);
 
 				if($i>=0&&$tmp_val2>$tmp_val){
@@ -398,7 +401,8 @@
 
 				show_algorithm1(3);
 				//show_array($array_copy);
-				showCurrentArray($array_copy, $i, $j);
+				//showCurrentArray($array_copy, $i, $j);
+                                arrowArray($array_copy, $i, $j);
 				written_section1($array_copy,$i,$j,$lineNum,$tmp_val);
 
 				//step into line 2 again
@@ -419,7 +423,8 @@
 				
 				//just for current array method
 				$tempj = $j+1;
-				showCurrentArray($array_copy, $i, $tempj);
+				//showCurrentArray($array_copy, $i, $tempj);
+                                arrowArray($array_copy, $i, $j);
 				$array1[$i] = $tmp_val;
 
 				//the iteration part of the for-loop
@@ -439,7 +444,8 @@
 			case 5;
 			show_algorithm(5);
 			//show_array($array_copy);
-			showCurrentArray($array_copy, $i, $j);
+			//showCurrentArray($array_copy, $i, $j);
+                        arrowArray($array_copy, $i, $j);
 			written_section1($array_copy,$i,$j,$lineNum,$tmp_val);
 			//echo "YOU ARE DONE!";
 			break;
@@ -449,7 +455,82 @@
 	}
 
 	
+	function arrowArrayOriginal($array){
+		// Print the indexes
+		echo "<div align = \"center\">";
+		echo "<table border='0' cellpadding='0' style='font-size:12pt;'>";
+		echo "<tr align='center' valign='bottom'>";
+	
+		// Print the indexes numbers
+		for($LCV = 0; $LCV < count($array); $LCV++)
+			echo "<td width='52'>$LCV</td>";
+	
+			echo "</tr></table>";
+	
+			// Print the array
+	
+			echo "<table border='1' cellpadding='5' style='font-size:18pt;'>";
+			echo "<tr align='center'>";
+	
+			for($LCV = 0; $LCV < count($array); $LCV++)
+			{
+			if($LCV < $index)
+				echo "<td width='40' bgcolor=gray>" . $array[$LCV] . "</td>";
+				else
+				echo "<td width='40' bgcolor=white>" . $array[$LCV] . "</td>";
+			}
+	
+				echo "</tr></table>";
+	echo "</div>";
+			
+				}
+	
+	function arrowArray($array, $ival, $jval){
+		// Print the indexes
+		echo "<div align=\"center\">";
+		echo "<table border='0' cellpadding='0' style='font-size:12pt;'>";
+		echo "<tr align='center' valign='bottom'>";
+		
+		// Print the indexes numbers
+		for($LCV = 0; $LCV < count($array); $LCV++)
+			echo "<td width='52'>$LCV</td>";
+				
+			echo "</tr></table>";
+		
+			// Print the array
+		
+			echo "<table border='1' cellpadding='5' style='font-size:18pt;'>";
+			echo "<tr align='center'>";
+		
+			for($LCV = 0; $LCV < count($array); $LCV++)
+			{
+			if($LCV < $index)
+				echo "<td width='40' bgcolor=gray>" . $array[$LCV] . "</td>";
+				else
+				echo "<td width='40' bgcolor=white>" . $array[$LCV] . "</td>";
+			}
+		
+			echo "</tr></table>";
+		
+			// Print the variable arrows
+		
+			echo "<table border='0' cellpadding='0' style='font-size:12pt;'>";
+			echo "<tr align='center' valign='top'>";
+		
+			for($LCV = 0; $LCV < count($array); $LCV++)
+			{
+			echo "<td width='52'>";
+			if($LCV == $iVal)
+			echo "&uarr;<br/>I Value<br/>";
+			if($LCV == $jVal)
+					echo "&uarr;<br/>J Value<br/>";
+			}
+		
+			echo "</tr></table>";
+		echo "</div>";
+	}
 
+	
 	function backButton(){
 
 		echo "<form>";

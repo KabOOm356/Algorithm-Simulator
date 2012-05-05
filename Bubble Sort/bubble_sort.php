@@ -31,6 +31,84 @@ function bubbleSort($array)
 	}
 	print_r($array);
 }
+function arrowArray($array, $ival, $jval){
+	// Print the indexes
+	echo "<div align=\"center\">";
+	echo "<table border='0' cellpadding='0' style='font-size:12pt;'>";
+	echo "<tr align='center' valign='bottom'>";
+
+	// Print the indexes numbers
+	for($LCV = 0; $LCV < count($array); $LCV++)
+		echo "<td width='52'>$LCV</td>";
+
+		echo "</tr></table>";
+
+		// Print the array
+
+		echo "<table border='1' cellpadding='5' style='font-size:18pt;'>";
+		echo "<tr align='center'>";
+
+		for($LCV = 0; $LCV < count($array); $LCV++)
+		{
+		if($LCV < $index)
+			echo "<td width='40' bgcolor=gray>" . $array[$LCV] . "</td>";
+			else
+			echo "<td width='40' bgcolor=white>" . $array[$LCV] . "</td>";
+		}
+
+			echo "</tr></table>";
+
+			// Print the variable arrows
+
+			echo "<table border='0' cellpadding='0' style='font-size:12pt;'>";
+			echo "<tr align='center' valign='top'>";
+
+			for($LCV = 0; $LCV < count($array); $LCV++)
+			{
+			echo "<td width='52'>";
+				if($LCV == $iVal)
+				echo "&uarr;<br/>Outer Loop Value<br/>";
+				if($LCV == $jVal)
+				echo "&uarr;<br/>Inner Loop Value<br/>";
+			}
+
+			echo "</tr></table>";
+				echo "</div>";
+}
+
+
+
+function arrowArrayOriginal($array){
+	// Print the indexes
+	echo "<div align = \"center\">";
+	echo "<table border='0' cellpadding='0' style='font-size:12pt;'>";
+	echo "<tr align='center' valign='bottom'>";
+
+	// Print the indexes numbers
+	for($LCV = 0; $LCV < count($array); $LCV++)
+		echo "<td width='52'>$LCV</td>";
+
+		echo "</tr></table>";
+
+		// Print the array
+
+		echo "<table border='1' cellpadding='5' style='font-size:18pt;'>";
+		echo "<tr align='center'>";
+
+		for($LCV = 0; $LCV < count($array); $LCV++)
+		{
+		if($LCV < $index)
+			echo "<td width='40' bgcolor=gray>" . $array[$LCV] . "</td>";
+			else
+			echo "<td width='40' bgcolor=white>" . $array[$LCV] . "</td>";
+		}
+
+		echo "</tr></table>";
+		echo "</div>";
+				
+}
+
+
 function showOriginalArray($array)
 {
 	echo "<div align = \"center\">";
@@ -153,12 +231,7 @@ function set_up_values(){
 	//$length = count($array1);
 
         
-	echo "DEBUG STUFF <br />";
-	echo "line num: $lineNum <br />\n";
-	echo "outerval: $outerVal <br />\n";
-	echo "innerval: $innerVal <br />\n";
-	//echo "tmpval: $tmpVal <br />\n";
-	echo "length: $length <br />\n";
+
 
 	bubble_sort($array_copy,$lineNum,$outerVal,$innerVal,$length, $arrayOriginal);
 
@@ -257,8 +330,9 @@ function bubble_sort($array_copy,$lineNum,$outerVal,$innerVal, $length, $arrayOr
 	}
 	*/
 	$arrayOriginal1 =$arrayOriginal;
-	showOriginalArray($arrayOriginal1);
+	arrowArrayOriginal($arrayOriginal1);
 
+	
 	show_algorithm($lineNum);
 	switch($lineNum)
 	{
@@ -270,7 +344,8 @@ function bubble_sort($array_copy,$lineNum,$outerVal,$innerVal, $length, $arrayOr
 		case 0:
 			//make sure innerval is 0 in case you step inside for-loop
 			$innerVal =0;
-			showCurrentArray($array_copy, $outerVal, $innerVal);
+			//showCurrentArray($array_copy, $outerVal, $innerVal);
+			arrowArray($array_copy, $outerVal, $innerVal);
 			written_section($array_copy, $lineNum, $outerVal, $innerVal, $length);
 			if($outerVal < $length){
 				//enter for-loop
@@ -290,12 +365,14 @@ function bubble_sort($array_copy,$lineNum,$outerVal,$innerVal, $length, $arrayOr
 			
 			if($innerVal < $length){
 				//enter for-loop
-				showCurrentArray($array_copy, $outerVal, $innerVal);
+				//showCurrentArray($array_copy, $outerVal, $innerVal);
+				arrowArray($array_copy, $outerVal, $innerVal);
 				written_section($array_copy, $lineNum, $outerVal, $innerVal, $length);
 				$lineNum =2;
 			}else{
 				//algorithm is over
-				showCurrentArray($array_copy, $outerVal, $innerVal);
+				//showCurrentArray($array_copy, $outerVal, $innerVal);
+				arrowArray($array_copy, $outerVal, $innerVal);
 				written_section($array_copy, $lineNum, $outerVal, $innerVal, $length);
 				
 				$lineNum = 0;
@@ -310,7 +387,8 @@ function bubble_sort($array_copy,$lineNum,$outerVal,$innerVal, $length, $arrayOr
 			$compareValue1 = $array_copy[$outerVal];
 			$compareValue2 = $array_copy[$innerVal];
 
-			showCurrentArray($array_copy, $outerVal, $innerVal);
+			//showCurrentArray($array_copy, $outerVal, $innerVal);
+			arrowArray($array_copy, $outerVal, $innerVal);
 			written_section($array_copy, $lineNum, $outerVal, $innerVal, $length);
 			if($compareValue1<$compareValue2){
 				//enter if-statement
@@ -335,7 +413,8 @@ function bubble_sort($array_copy,$lineNum,$outerVal,$innerVal, $length, $arrayOr
 			$array_copy[$innerVal] = $tmpVal;
 
 			$innerVal = $innerVal + 1;
-			showCurrentArray($array_copy, $outerVal, $innerVal);
+			//showCurrentArray($array_copy, $outerVal, $innerVal);
+			arrowArray($array_copy, $outerVal, $innerVal);
 			written_section($array_copy, $lineNum, $outerVal, $innerVal, $length);
 			$lineNum = 1;
 
@@ -347,7 +426,8 @@ function bubble_sort($array_copy,$lineNum,$outerVal,$innerVal, $length, $arrayOr
 			case for when algorithm is over
 			*/
 		case 4:
-			showCurrentArray($array_copy, $outerVal, $innerVal);
+			//showCurrentArray($array_copy, $outerVal, $innerVal);
+			arrowArray($array_copy, $outerVal, $innerVal);
 			written_section($array_copy, $lineNum, $outerVal, $innerVal, $length);
 			print_r($array_copy);
 			echo "<br /> ARRAY SHOULD BE SORTED!";
